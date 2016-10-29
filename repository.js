@@ -37,3 +37,10 @@ var testMessage = function () {
 	});
 }
 
+var logTwilioInbound = function (event_number, checkin_number, content) {
+	console.log("Message Received!");
+	console.log("Text to " + event_number + " from " + checkin_number + " received.");
+	console.log("Message: " + content);
+}
+
+module.export.logTwilioInbound = logTwilioInbound;

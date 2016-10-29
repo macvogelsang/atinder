@@ -13,7 +13,10 @@ app.get('*', function (req, res) {
 });
 
 app.post('/twilio/response', function (req, res) {
-	console.log(req);
+	var event_number = req.body.To;
+	var checkin_number = req.body.From;
+	var content = req.body.Body;
+	repository.logTwilioInbound(event_number, checkin_number, content);
 });
 
 app.listen(56789, function () {
