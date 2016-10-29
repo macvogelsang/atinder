@@ -9,17 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppCmp = (function () {
-    function AppCmp() {
+var EventCmp = (function () {
+    function EventCmp() {
     }
-    AppCmp = __decorate([
+    EventCmp = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            templateUrl: 'app/app.cmp.html'
+            selector: 'event',
+            templateUrl: 'app/event.cmp.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], AppCmp);
-    return AppCmp;
+    ], EventCmp);
+    return EventCmp;
 }());
-exports.AppCmp = AppCmp;
-//# sourceMappingURL=app.cmp.js.map
+exports.EventCmp = EventCmp;
+//# sourceMappingURL=event.cmp.js.map

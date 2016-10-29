@@ -10,14 +10,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var router_1 = require('@angular/router');
+var forms_1 = require('@angular/forms');
 var app_cmp_1 = require('./app.cmp');
+var home_cmp_1 = require('./home.cmp');
+var dashboard_cmp_1 = require('./dashboard.cmp');
+var event_cmp_1 = require('./event.cmp');
+// import {NotFoundCmp} from './notfound.cmp';
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [app_cmp_1.AppCmp],
+            imports: [
+                platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
+                router_1.RouterModule.forRoot([
+                    { path: 'event/:id', component: event_cmp_1.EventCmp },
+                    { path: ':id', component: dashboard_cmp_1.DashboardCmp },
+                    { path: '', component: home_cmp_1.HomeCmp },
+                    { path: '**', component: home_cmp_1.HomeCmp }
+                ]),
+            ],
+            declarations: [
+                app_cmp_1.AppCmp,
+                home_cmp_1.HomeCmp,
+                dashboard_cmp_1.DashboardCmp,
+                event_cmp_1.EventCmp
+            ],
             bootstrap: [app_cmp_1.AppCmp]
         }), 
         __metadata('design:paramtypes', [])
