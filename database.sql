@@ -1,4 +1,4 @@
 create database atinder;
 use atinder;
-create table events (  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,  date_start date,  date_end date,  check_start date,  check_end date,  admin_code varchar(255),  even_name varchar(255),  event_description long,  event_code int );
-create table check_ins (  id int not null auto_increment primary key,  phone_number varchar(255),  event_id int,  content long );
+create table events ( eventId varchar(255) PRIMARY KEY, dateStart varchar(255),  dateEnd varchar(255),  checkStart varchar(255),  checkEnd varchar(255),  adminId varchar(255),  name varchar(255),  description long,  number varchar(255), timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP )
+create table check_ins (  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,  phone_number varchar(255),  event_id int,  content long );

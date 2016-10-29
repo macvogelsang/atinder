@@ -37,4 +37,65 @@ var logTwilioInbound = function (event_number, checkin_number, content) {
 	console.log("Message: " + content);
 }
 
+var generateId = function (digits) {
+	var text = "";
+    var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+    for ( var i=0; i < digits; i++ ) {
+    	text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
+
+var createEvent = function (adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
+	var possibleId = generateId(3);
+    var query = "SELECT * FROM events WHERE eventId = '" + possibleId + "';";
+    sql.query(query, function (err, recordSet) {
+    	if (err) {
+    		console.log(err);
+    	} else {
+    		if (recordSet.length != 0) {
+    			createEvent(adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+    		} else {
+    			eventId = possibleId;
+    			createEventAdminId(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+    		}
+    	}
+    });
+}
+
+var createEventAdminId = function (eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
+	if (adminId == "") {
+		var possibleId = generateId(6);
+		var query = "SELECT * FROM events WHERE adminId = '" + possibleId + "';";
+		sql.query(query, function (err, recordSet) {
+			if (err) {
+				console.log(err);
+			} else {
+				if (recordSet != 0) {
+					createEventAdminId(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+				} else {
+					adminId = possibleId;
+					createEventFinal(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+				}
+			}
+		}
+	} else {
+		createEventFinal(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+	}
+}
+
+var createEventFinal = function (eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
+	var query = "INSERT INTO events (eventId, dateStart, dateEnd, checkStart, checkEnd, adminId, name, description, number) VALUES ('" + eventId + "', '" + dateStart + "', '" + dateEnd + "', '" + checkStart + "', '" + checkEnd + "', '" + adminId + "', '" + name + "', '" + description + "', " + number + ");");
+	sql.query(query, function (err, recordSet) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send({
+				adminId: adminId	
+			});
+		}
+	});
+}
+
 module.exports.logTwilioInbound = logTwilioInbound;
+module.exports.createEvent = createEvent;

@@ -20,6 +20,18 @@ app.post('/twilio/response', function (req, res) {
 	repository.logTwilioInbound(event_number, checkin_number, content);
 });
 
+app.post('/createEvent', function (req, res)) {
+	var adminId = req.body.adminId;
+	var name = req.body.name;
+	var description = req.body.description;
+	var dateStart = req.body.dateStart;
+	var dateEnd = req.body.dateEnd;
+	var checkStart = req.body.checkStart;
+	var checkEnd = req.body.checkEnd;
+	repository.createEvent(adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+	//require back: adminCode
+}
+
 app.listen(port, function () {
 	console.log("Server running at port " + port);
 });
