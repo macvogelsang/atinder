@@ -13,9 +13,12 @@ var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
 var forms_1 = require('@angular/forms');
 var app_cmp_1 = require('./app.cmp');
+var http_1 = require('@angular/http');
 var home_cmp_1 = require('./home.cmp');
 var dashboard_cmp_1 = require('./dashboard.cmp');
 var event_cmp_1 = require('./event.cmp');
+var event_form_cmp_1 = require('./event-form.cmp');
+// import {MasterService} from './master.service';
 // import {NotFoundCmp} from './notfound.cmp';
 var AppModule = (function () {
     function AppModule() {
@@ -25,6 +28,7 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                http_1.HttpModule,
                 router_1.RouterModule.forRoot([
                     { path: 'event/:id', component: event_cmp_1.EventCmp },
                     { path: ':id', component: dashboard_cmp_1.DashboardCmp },
@@ -36,7 +40,8 @@ var AppModule = (function () {
                 app_cmp_1.AppCmp,
                 home_cmp_1.HomeCmp,
                 dashboard_cmp_1.DashboardCmp,
-                event_cmp_1.EventCmp
+                event_cmp_1.EventCmp,
+                event_form_cmp_1.EventFormCmp
             ],
             bootstrap: [app_cmp_1.AppCmp]
         }), 

@@ -3,16 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import { AppCmp }   from './app.cmp';
+import { HttpModule }    from '@angular/http';
 
 import {HomeCmp} from './home.cmp';
 import {DashboardCmp} from './dashboard.cmp';
 import {EventCmp} from './event.cmp';
+import {EventFormCmp} from './event-form.cmp';
+
+// import {MasterService} from './master.service';
 // import {NotFoundCmp} from './notfound.cmp';
 
 @NgModule({
-  imports: [ 
+  imports: [
       BrowserModule,
       FormsModule,
+      HttpModule,
       RouterModule.forRoot([
           { path: 'event/:id', component: EventCmp },
           { path: ':id', component: DashboardCmp },
@@ -20,11 +25,12 @@ import {EventCmp} from './event.cmp';
           { path: '**', component: HomeCmp }
       ]),
   ],
-  declarations: [ 
+  declarations: [
       AppCmp,
       HomeCmp,
       DashboardCmp,
-      EventCmp
+      EventCmp,
+      EventFormCmp
   ],
   bootstrap:    [ AppCmp ]
 })

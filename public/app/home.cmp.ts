@@ -5,5 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: 'app/home.cmp.html'
 })
 export class HomeCmp {
+    formHidden = true;
 
+    showForm(){
+        this.formHidden = false;
+
+    }
 }

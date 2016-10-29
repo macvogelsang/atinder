@@ -1,1 +1,9 @@
-<h1>Home page</h1>
+<div class="wrapper-top">
+	<div class="home-content">
+		<h1>Text In</h1>
+		<h3>A simple app for taking event attendance via SMS</h3><br>
+		<img src="images/atinder.png"><br>
+		<button *ngIf="formHidden" (click)="showForm()" class="btn btn-success">Create Event</button>
+		<event-form *ngIf="!formHidden"></event-form>
+	</div>
+</div>

@@ -9,21 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var HomeCmp = (function () {
-    function HomeCmp() {
-        this.formHidden = true;
+var EventFormCmp = (function () {
+    function EventFormCmp() {
+        this.powers = ['Really Smart', 'Super Flexible',
+            'Super Hot', 'Weather Changer'];
+        this.model = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
+        this.submitted = false;
     }
-    HomeCmp.prototype.showForm = function () {
-        this.formHidden = false;
-    };
-    HomeCmp = __decorate([
+    EventFormCmp.prototype.onSubmit = function () { this.submitted = true; };
+    Object.defineProperty(EventFormCmp.prototype, "diagnostic", {
+        // TODO: Remove this when we're done
+        get: function () { return JSON.stringify(this.model); },
+        enumerable: true,
+        configurable: true
+    });
+    EventFormCmp = __decorate([
         core_1.Component({
-            selector: 'home',
-            templateUrl: 'app/home.cmp.html'
+            moduleId: module.id,
+            selector: 'event-form',
+            templateUrl: 'app/event-form.cmp.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], HomeCmp);
-    return HomeCmp;
+    ], EventFormCmp);
+    return EventFormCmp;
 }());
-exports.HomeCmp = HomeCmp;
-//# sourceMappingURL=home.cmp.js.map
+exports.EventFormCmp = EventFormCmp;
+//# sourceMappingURL=event.form.js.map
