@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 
 var repository = require('./repository.js');
 var app = express();
+var port = 56789;
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({'extended': 'true'}));
@@ -19,5 +20,6 @@ app.post('/twilio/response', function (req, res) {
 	repository.logTwilioInbound(event_number, checkin_number, content);
 });
 
-app.listen(56789, function () {
+app.listen(port, function () {
+	console.log("Server running at port " + port);
 });

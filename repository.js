@@ -1,19 +1,13 @@
 var _ = require('lodash');
 var mysql = require('mysql');
-var twilioConfig = {
-	accountSid: "AC47daeb31d1c519b3730e5b55f36e0697",
-	authToken: "2e8d19d9c0300cb86c33ec01963206d8"
-}
+var fs = require('fs');
+var twilioConfig = JSON.parse(fs.readFileSync('./config/twilioConfig.json', 'utf8'));
+var mysqlConfig = JSON.parse(fs.readFileSync('./config/mysqlConfig.json', 'utf8'));
 var http = require('http');
 
 var twilio = require('twilio')(twilioConfig.accountSid, twilioConfig.authToken);
 
-var sql = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: '',
-	database: 'atinder'
-});
+var sql = mysql.createConnection(mysqlConfig);
 
 sql.connect(function (err) {
 	console.log("Database connection established.");
