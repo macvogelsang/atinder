@@ -14,10 +14,9 @@ app.get('*', function (req, res) {
 });
 
 app.post('/twilio/response', function (req, res) {
-	var event_number = req.body.To;
-	var checkin_number = req.body.From;
+	var checkinNumber = req.body.From;
 	var content = req.body.Body;
-	repository.logTwilioInbound(event_number, checkin_number, content);
+	repository.logTwilioInbound(checkinNumber, content);
 });
 
 app.post('/createEvent', function (req, res)) {
@@ -29,7 +28,6 @@ app.post('/createEvent', function (req, res)) {
 	var checkStart = req.body.checkStart;
 	var checkEnd = req.body.checkEnd;
 	repository.createEvent(adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
-	//require back: adminCode
 }
 
 app.listen(port, function () {

@@ -16,6 +16,9 @@ sql.connect(function (err) {
 	}
 });
 
+var escapeString = function (str) {
+	return str.replace(/'/g, "''");
+}
 var testMessage = function () {
 	twilio.messages.create({
 		body: "Yo Mac, this is a test message from our backend",
@@ -31,10 +34,57 @@ var testMessage = function () {
 	});
 }
 
-var logTwilioInbound = function (event_number, checkin_number, content) {
-	console.log("Message Received!");
-	console.log("Text to " + event_number + " from " + checkin_number + " received.");
-	console.log("Message: " + content);
+var logTwilioInbound = function (checkinNumber, content) {
+	var currentTime = new Date();
+	content = content.trim();
+	var eventId = content.substring(0, 3);
+	var cleanContent = content.substring(2);
+	cleanContent = escapeString(cleanContent);
+	var query = "SELECT checkStart, checkEnd FROM events WHERE eventId = '" + eventId + "';"
+	sql.query(query, function (err, recordSet) {
+		if (err) {
+			console.log(err);
+		} else {
+			var checkStart = new Date(recordSet.checkStart);
+			var checkEnd = new Date(recordSet.checkEnd);
+			if (currentTime.getTime() >= checkStart.getTime() && currentTime.getTime() <= checkEnd.getTime()) {
+				sendTwilioConfirmation(checkinNumber);
+				var queryStore = "INSERT INTO check_ins (number, eventId, content) VALUES ('" + checkinNumber + "', '" + eventId + "', '" + cleanContent + "' )";
+			} else {
+				sendTwilioDeny(checkinNumber);
+			}
+		}
+	});
+}
+
+var sendTwilioConfirmation = function (checkinNumber) {
+	twilio.messages.create({
+		body: "Thank you for texting in! Your attendanced has been recorded.",
+		to: checkinNumber,
+		from: "19196662564"
+	}, function (err, data) {
+		if (err) {
+			console.log("Twilio error");
+			console.log(err);
+		} else {
+			console.log("Message sent successfully");
+		}
+	});
+}
+
+var sendTwilioDeny = function (checkinNumber) {
+	twilio.messages.create({
+		body: "Uh-oh, you are outside of the check in time! Please check with the event coordinator for the proper time.",
+		to: checkinNumber,
+		from: "19196662564"
+	}, function (err, data) {
+		if (err) {
+			console.log("Twilio error");
+			console.log(err);
+		} else {
+			console.log("Message sent successfully");
+		}
+	});
 }
 
 var generateId = function (digits) {
@@ -85,6 +135,8 @@ var createEventAdminId = function (eventId, adminId, number, name, description, 
 }
 
 var createEventFinal = function (eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
+	name = escapeString(name);
+	description = escapeString(description);
 	var query = "INSERT INTO events (eventId, dateStart, dateEnd, checkStart, checkEnd, adminId, name, description, number) VALUES ('" + eventId + "', '" + dateStart + "', '" + dateEnd + "', '" + checkStart + "', '" + checkEnd + "', '" + adminId + "', '" + name + "', '" + description + "', " + number + ");");
 	sql.query(query, function (err, recordSet) {
 		if (err) {
