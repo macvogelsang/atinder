@@ -1,0 +1,25 @@
+{
+  "name": "atinder",
+  "version": "1.0.0",
+  "description": "simple app for atinding events",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macvogelsang/atinder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macvogelsang/atinder/issues"
+  },
+  "homepage": "https://github.com/macvogelsang/atinder#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "lodash": "^4.16.4",
+    "mysql": "^2.11.1",
+    "twilio": "^2.11.0"
+  }
+}
