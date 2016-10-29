@@ -12,5 +12,9 @@ app.get('*', function (req, res) {
 	res.sendFile('./public/index.html');
 });
 
+app.post('twilio/response', function (req, res) {
+	console.log(req);
+});
+
 app.listen(3000, function () {
 });
