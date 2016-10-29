@@ -43,4 +43,4 @@ var logTwilioInbound = function (event_number, checkin_number, content) {
 	console.log("Message: " + content);
 }
 
-module.export.logTwilioInbound = logTwilioInbound;
+module.exports.logTwilioInbound = logTwilioInbound;
