@@ -1,5 +1,5 @@
 {
-  "name": "angular-quickstart",
+  "name": "atinder-public",
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
@@ -26,13 +26,9 @@
     "angular-in-memory-web-api": "~0.1.13",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
-    "express": "^4.14.0",
-    "lodash": "^4.16.4",
-    "mysql": "^2.11.1",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.39",
-    "twilio": "^2.11.0",
     "zone.js": "^0.6.25"
   },
   "devDependencies": {
