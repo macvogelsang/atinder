@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+
 @Component({
   selector: 'my-app',
-  template: '<h1>Atinding made easy!</h1>'
+  templateUrl: 'app/app.cmp.html'
 })
-export class AppCmp { }
+export class AppCmp {
+
+}
