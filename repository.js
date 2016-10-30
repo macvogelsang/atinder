@@ -249,7 +249,7 @@ var getUserCheckIn = function (adminId, number, res) {
 			var ronaldQuery = "SELECT * FROM events WHERE eventId IN (";
 			var count = 0;
 			_.forEach(eventIds, function (id) {
-				ronaldQuery = "'" + id + "'";
+				ronaldQuery += ("'" + id + "'");
 				count++;
 				if (count < eventIds.length) {
 					ronaldQuery += ", ";
