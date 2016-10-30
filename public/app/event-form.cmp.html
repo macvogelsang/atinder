@@ -1,6 +1,6 @@
 <div class="well event-form">
 	<h3>New Event</h3>
-	<form class="form-horizontal" (ngSubmit)="onSubmit()" #eventForm="ngForm">
+	<form #eventForm="ngForm">
 		<fieldset>
 			<div class="form-group" [class.has-error]="!name.valid && !name.pristine">
 				<label for="name">Event Name</label>
@@ -16,8 +16,23 @@
 				<input type="text" class="form-control" id="description"
 				  [(ngModel)]="model.description" name="description">
 			</div>
+			<div class="row">
 
-			<button type="submit"  [disabled]="!eventForm.form.valid" class="btn btn-success">Create</button>
+				<div class="form-group col-md-6">
+					<label for="check start">Start check in time</label>
+					 <datepicker [(ngModel)]="tempDateStart" name="tempDateStart" [minDate]="minDate" [showWeeks]="false"></datepicker>
+					 <timepicker class="timepicker" [(ngModel)]="tempTimeStart" name="tempTimeStart" [hourStep]="1" [minuteStep]="15" [showMeridian]="true"></timepicker>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="check start">End check in time</label>
+					 <datepicker [(ngModel)]="tempDateEnd" name="tempDateEnd" [minDate]="minDate" [showWeeks]="false"></datepicker>
+					 <timepicker class="timepicker" [(ngModel)]="tempTimeEnd" name="tempTimeEnd" [hourStep]="1" [minuteStep]="15" [showMeridian]="true"></timepicker>
+				</div>
+
+			</div>
+			<span class="help-block" *ngIf="!datesValid">The event check in time must be before the ending time.</span>
+
+			<button type="submit" (click)="onSubmit()" [disabled]="!eventForm.form.valid" class="btn btn-success">Create</button>
 		</fieldset>
 	</form>
 </div>

@@ -3,9 +3,9 @@ export class Event {
 		public adminId: string,
 		public name: string,
 		public description: string,
-		public dateStart: string,
-		public dateEnd: string,
-		public checkStart: string,
-		public checkEnd: string
+		public dateStart ,
+		public dateEnd,
+		public checkStart,
+		public checkEnd
 	) {}
 }
