@@ -13,11 +13,12 @@ var router_1 = require('@angular/router');
 var event_1 = require('./event');
 var master_service_1 = require('./master.service');
 var EventFormCmp = (function () {
-    function EventFormCmp(service, route) {
+    function EventFormCmp(service, router) {
         this.service = service;
-        this.route = route;
+        this.router = router;
         this.datesValid = true;
         this.model = new event_1.Event('', '', '', '', '', '', '');
+        this.minDate = new Date();
         this.submitted = false;
         this.model.checkStart = new Date();
         this.model.checkEnd = new Date();
@@ -53,7 +54,7 @@ var EventFormCmp = (function () {
             this.service.createEvent(this.model).then(function (res) {
                 console.log(res.json());
                 _this.adminId = res.json().adminId;
-                var link = ['/', adminId];
+                var link = ['/', _this.adminId];
                 _this.router.navigate(link);
             });
         }
@@ -71,7 +72,7 @@ var EventFormCmp = (function () {
             templateUrl: 'event-form.cmp.html',
             providers: [master_service_1.MasterService]
         }), 
-        __metadata('design:paramtypes', [master_service_1.MasterService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [master_service_1.MasterService, router_1.Router])
     ], EventFormCmp);
     return EventFormCmp;
 }());

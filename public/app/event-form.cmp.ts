@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Event }    from './event';
 import {MasterService} from './master.service';
 
@@ -28,7 +28,9 @@ export class EventFormCmp {
   	''
   );
 
-  constructor(private service: MasterService, private route: ActivatedRoute){
+  minDate = new Date();
+
+  constructor(private service: MasterService, private router: Router){
 	  this.model.checkStart = new Date();
 	  this.model.checkEnd = new Date();
 
@@ -72,7 +74,7 @@ export class EventFormCmp {
           this.service.createEvent(this.model).then(res => {
     		  console.log(res.json())
               this.adminId = res.json().adminId;
-              let link = ['/', adminId];
+              let link = ['/', this.adminId];
               this.router.navigate(link);
     	  })
       }
