@@ -25,6 +25,7 @@ app.post('/twilio/response', function (req, res, io) {
 	var checkinNumber = req.body.From;
 	var content = req.body.Body;
 	repository.logTwilioInbound(checkinNumber, content);
+	res.sendStatus(200);
 });
 
 app.post('/createEvent', function (req, res) {

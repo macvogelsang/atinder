@@ -41,6 +41,7 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 	var eventId = content.substring(0, 3);
 	var cleanContent = content.substring(2);
 	cleanContent = escapeString(cleanContent);
+	cleanContent = cleanContent.trim();
 	var query = "SELECT checkStart, checkEnd FROM events WHERE eventId = '" + eventId + "';"
 	sql.query(query, function (err, recordSet) {
 		if (err) {
@@ -164,7 +165,7 @@ var createEventFinal = function (eventId, adminId, name, description, dateStart,
 
 var getAdminPage = function (adminId, res) {
 	var query = "SELECT eventId, name, description, checkStart, checkEnd FROM events WHERE adminId = '" + adminId + "';";
-	var queryCounts = "SELECT eventId, count AS count from check_ins GROUP BY eventId";
+	var queryCounts = "SELECT eventId, count(*) AS count from check_ins GROUP BY eventId";
 	sql.query(query, function (err, recordSet) {
 		if (err) {
 			console.log(err);
