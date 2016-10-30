@@ -237,13 +237,35 @@ var getEventPage = function (eventId, res) {
 }
 
 var getUserCheckIn = function (adminId, number, res) {
-	var query = "SELECT * FROM check_ins WHERE number = '" + number + "' AND adminId = '" + adminId + "';";
+	var query = "SELECT eventId FROM check_ins WHERE number = '" + number + "';";
 	sql.query(query, function (err, recordSet) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.send({
-				userCheckIn: recordSet
+			var eventIds = [];
+			_.forEach(recordSet, function (record) {
+				eventIds.push(record.eventId);
+			});
+			var ronaldQuery = "SELECT * FROM events WHERE eventId IN (";
+			var count = 0;
+			_.forEach(eventIds, function (id) {
+				ronaldQuery = "'" + id + "'";
+				count++;
+				if (count < eventIds.length) {
+					ronaldQuery += ", ";
+				} else {
+					ronaldQuery += ");";
+				}
+			});
+			console.log(ronaldQuery);
+			sql.query(ronaldQuery, function (err, ronaldSet) {
+				if (err) {
+					console.log(err);
+				} else {
+					res.send({
+						events: ronaldSet
+					});
+				}
 			});
 		}
 	});
