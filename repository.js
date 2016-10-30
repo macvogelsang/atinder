@@ -39,9 +39,9 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 	var currentTime = new Date();
 	content = content.trim();
 	var eventId = content.substring(0, 3);
-	var cleanContent = content.substring(2);
-	cleanContent = escapeString(cleanContent);
+	var cleanContent = content.substring(3);
 	cleanContent = cleanContent.trim();
+	cleanContent = escapeString(cleanContent);
 	var query = "SELECT checkStart, checkEnd FROM events WHERE eventId = '" + eventId + "';"
 	sql.query(query, function (err, recordSet) {
 		if (err) {
