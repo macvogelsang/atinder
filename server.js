@@ -22,10 +22,10 @@ app.use(bodyParser.json());
 //	res.sendFile('/public/index.html');
 //});
 
-app.post('/twilio/response', function (req, res, io) {
+app.post('/twilio/response', function (req, res) {
 	var checkinNumber = req.body.From;
 	var content = req.body.Body;
-	repository.logTwilioInbound(checkinNumber, content);
+	repository.logTwilioInbound(checkinNumber, content, io);
 });
 
 app.post('/api/createEvent', function (req, res) {
@@ -48,6 +48,12 @@ app.post('/api/getAdminPage', function (req, res) {
 app.post('/api/getEventPage', function (req, res) {
 	var eventId = req.body.eventId;
 	repository.getEventPage(eventId, res);
+});
+
+app.post('/api/getUserCheckIn', function (req, res) {
+	var adminId = req.body.adminId;
+	var number = req.body.number;
+	repository.getUserCheckIn(adminId, number, res);
 });
 
 app.get('*', function(req, res) {

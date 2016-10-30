@@ -74,7 +74,7 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 										number: checkinNumber,
 										content: cleanContent
 									}
-									//io.sockets.emit(eventId, check);
+									io.sockets.emit(eventId, check);
 								}
 							});
 						}
@@ -231,6 +231,19 @@ var getEventPage = function (eventId, res) {
 						checks: recordSet
 					});
 				}
+			});
+		}
+	});
+}
+
+var getUserCheckIn = function (adminId, number, res) {
+	var query = "SELECT * FROM check_ins WHERE number = '" + number + "' AND adminId = '" + adminId + "';";
+	sql.query(query, function (err, recordSet) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send({
+				userCheckIn: recordSet
 			});
 		}
 	});
