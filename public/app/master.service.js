@@ -20,7 +20,7 @@ var MasterService = (function () {
     }
     MasterService.prototype.createEvent = function (event) {
         return this.http
-            .post(this.url + '/createEvent', event)
+            .post('/createEvent', event)
             .toPromise()
             .then(function (res) { return res.json().data; })
             .catch(function (err) { return console.log(err); });

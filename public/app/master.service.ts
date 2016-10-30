@@ -11,7 +11,7 @@ export class MasterService {
 	constructor(private http: Http) { }
 	createEvent(event) {
 		return this.http
-		.post(this.url + '/createEvent', event)
+		.post('/createEvent', event)
 		.toPromise()
 		.then(res => res.json().data)
 		.catch(err => console.log(err));
