@@ -1,19 +1,21 @@
 <div class="wrapper-top">
 	<div class="row dashboard-header">
-		<h1>Admin Dashboard (id: {{adminId}})</h1>
+		<h1>Admin Dashboard</h1>
 		<p>Save the url of this page to return to it later</p>
 	</div>
-	<div class="row">
-		<div class="col-md-6 dashboard-events">
-			<div *ngFor="let event of events" class="event-panel">
-				<h4>{{event.name}} | {{event.eventId}}</h4>
-				<p>{{event.description}}</p>
-				<p>Start time: {{event.checkStart | date:'short'}}</p>
-				<p>End time: {{event.checkEnd | date:'short'}}</p>
+	<div class="row dashboard-events">
+		<div *ngFor="let event of events" class="col-md-4">
+			<div class="event-panel">
+				<h4>{{event.name}} [id:{{event.eventId}}]</h4>
+				<p class="desc">{{event.description}}</p>
+				<p class="time">Start time: {{event.checkStart | date:'short'}}</p>
+				<p class="time">End time: {{event.checkEnd | date:'short'}}</p>
 			</div>
 		</div>
-		<div class="col-md-6 dashboard-eve">
-			<button *ngIf="formHidden" (click)="showForm()" class="btn btn-success">Create Event</button>
+	</div>
+	<div class="row">
+		<div style="text-align:center;margin:0px auto;">
+			<button *ngIf="formHidden" (click)="showForm()" class="btn btn-success">Add New Event</button>
 			<event-form [adminId]="adminId" *ngIf="!formHidden"></event-form>
 		</div>
 	</div>

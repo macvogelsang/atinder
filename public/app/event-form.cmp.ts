@@ -45,7 +45,7 @@ export class EventFormCmp {
       var t = this.tempDateStart;
       this.model.checkStart.setDate(t.getDate());
       this.model.checkStart.setMonth(t.getMonth());
-      this.model.checkStart.setYear(t.getYear());
+      this.model.checkStart.setUTCFullYear(t.getUTCFullYear());
 
       var t = this.tempTimeStart;
       this.model.checkStart.setHours(t.getHours());
@@ -54,7 +54,7 @@ export class EventFormCmp {
       var t = this.tempDateEnd;
       this.model.checkEnd.setDate(t.getDate());
       this.model.checkEnd.setMonth(t.getMonth());
-      this.model.checkEnd.setYear(t.getYear());
+      this.model.checkEnd.setUTCFullYear(t.getUTCFullYear());
 
       var t = this.tempTimeEnd;
       this.model.checkEnd.setHours(t.getHours());

@@ -20,14 +20,14 @@ var MasterService = (function () {
     }
     MasterService.prototype.createEvent = function (event) {
         return this.http
-            .post('/createEvent', event)
+            .post('/api/createEvent', event)
             .toPromise()
             .then(function (res) { return res; })
             .catch(function (err) { return console.log(err); });
     };
     MasterService.prototype.getAdminDashboard = function (adminId) {
         return this.http
-            .post('/getAdminPage', { adminId: adminId })
+            .post('/api/getAdminPage', { adminId: adminId })
             .toPromise()
             .then(function (res) { return res; })
             .catch(function (err) { return console.log(err); });
