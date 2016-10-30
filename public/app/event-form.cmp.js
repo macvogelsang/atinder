@@ -20,7 +20,7 @@ var EventFormCmp = (function () {
     EventFormCmp.prototype.onSubmit = function () {
         this.submitted = true;
         this.service.createEvent(this.model).then(function (res) {
-            console.log(res);
+            console.log(res.json());
         });
     };
     Object.defineProperty(EventFormCmp.prototype, "diagnostic", {

@@ -98,14 +98,18 @@ var generateId = function (digits) {
 
 var createEvent = function (adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
 	var possibleId = generateId(3);
+	console.log("possibleId " + possibleId);
     var query = "SELECT * FROM events WHERE eventId = '" + possibleId + "';";
-    sql.query(query, function (err, recordSet) {
+    console.log(query);
+	sql.query(query, function (err, recordSet) {
     	if (err) {
     		console.log(err);
     	} else {
+		console.log(recordSet);
     		if (recordSet.length != 0) {
     			createEvent(adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
     		} else {
+			console.log("possibleId chosen for eventid");
     			eventId = possibleId;
     			createEventAdminId(eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
     		}
@@ -115,8 +119,10 @@ var createEvent = function (adminId, name, description, dateStart, dateEnd, chec
 
 var createEventAdminId = function (eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
 	if (adminId == "") {
+		console.log("No admin detected");
 		var possibleId = generateId(6);
 		var query = "SELECT * FROM events WHERE adminId = '" + possibleId + "';";
+		console.log(query);
 		sql.query(query, function (err, recordSet) {
 			if (err) {
 				console.log(err);
@@ -124,6 +130,7 @@ var createEventAdminId = function (eventId, adminId, name, description, dateStar
 				if (recordSet != 0) {
 					createEventAdminId(eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
 				} else {
+					console.log("No duplicate admin id found: " + adminId);
 					adminId = possibleId;
 					createEventFinal(eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
 				}
@@ -135,6 +142,7 @@ var createEventAdminId = function (eventId, adminId, name, description, dateStar
 }
 
 var createEventFinal = function (eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
+	console.log("Create Event Final Called");
 	var number = "19196662564";
 	name = escapeString(name);
 	description = escapeString(description);
@@ -143,6 +151,7 @@ var createEventFinal = function (eventId, adminId, name, description, dateStart,
 		if (err) {
 			console.log(err);
 		} else {
+			console.log(adminId);
 			res.send({
 				adminId: adminId
 			});

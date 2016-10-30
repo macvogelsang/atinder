@@ -26,7 +26,7 @@ export class EventFormCmp {
   onSubmit() {
 	  this.submitted = true;
 	  this.service.createEvent(this.model).then(res => {
-		  console.log(res)
+		  console.log(res.json())
 	  })
   }
   // TODO: Remove this when we're done

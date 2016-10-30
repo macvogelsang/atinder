@@ -13,7 +13,7 @@ export class MasterService {
 		return this.http
 		.post('/createEvent', event)
 		.toPromise()
-		.then(res => res.json().data)
+		.then(res => res)
 		.catch(err => console.log(err));
 	}
 }

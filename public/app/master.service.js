@@ -22,7 +22,7 @@ var MasterService = (function () {
         return this.http
             .post('/createEvent', event)
             .toPromise()
-            .then(function (res) { return res.json().data; })
+            .then(function (res) { return res; })
             .catch(function (err) { return console.log(err); });
     };
     MasterService = __decorate([
