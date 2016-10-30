@@ -52,6 +52,9 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 				console.log("EventId for checkin found");
 				var checkStart = new Date(recordSet.checkStart);
 				var checkEnd = new Date(recordSet.checkEnd);
+				console.log(checkStart.getTime());
+				console.log(currentTime.getTime());
+				console.log(checkEnd.getTime());
 				if (currentTime.getTime() >= checkStart.getTime() && currentTime.getTime() <= checkEnd.getTime()) {
 					var queryStore = "INSERT INTO check_ins (number, eventId, content) VALUES ('" + checkinNumber + "', '" + eventId + "', '" + cleanContent + "' )";
 					sql.query(queryStore, function (err, recordSet) {
