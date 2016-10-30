@@ -52,19 +52,31 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 				console.log("EventId for checkin found");
 				var checkStart = new Date(recordSet[0].checkStart);
 				var checkEnd = new Date(recordSet[0].checkEnd);
+				var queryStore;
 				if (currentTime.getTime() >= checkStart.getTime() && currentTime.getTime() <= checkEnd.getTime()) {
-					var queryStore = "INSERT INTO check_ins (number, eventId, content) VALUES ('" + checkinNumber + "', '" + eventId + "', '" + cleanContent + "' )";
-					sql.query(queryStore, function (err, recordSet) {
+					var ronaldQuery = "SELECT * FROM check_ins WHERE number = '" + checkinNumber + "' AND eventId = '" + eventId + "';";
+					sql.query(ronaldQuery, function (err, ronaldSet) {
 						if (err) {
 							console.log(err);
 						} else {
-							sendTwilioConfirmation(checkinNumber);
-							var check = {
-								eventId: eventId,
-								number: checkinNumber,
-								content: cleanContent
+							if (ronaldSet.length != 0) {
+								queryStore = "UPDATE check_ins SET content = '" + cleanContent + "' WHERE number = '" + checkinNumber + "' AND eventId = '" + eventId + "';";
+							} else {
+								queryStore = "INSERT INTO check_ins (number, eventId, content) VALUES ('" + checkinNumber + "', '" + eventId + "', '" + cleanContent + "' )";
 							}
-							io.sockets.emit(eventId, check);
+							sql.query(queryStore, function (err, recordSet) {
+								if (err) {
+									console.log(err);
+								} else {
+									sendTwilioConfirmation(checkinNumber);
+									var check = {
+										eventId: eventId,
+										number: checkinNumber,
+										content: cleanContent
+									}
+									io.sockets.emit(eventId, check);
+								}
+							});
 						}
 					});
 				} else {
@@ -209,9 +221,17 @@ var getEventPage = function (eventId, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.send({
-				checks: recordSet
-			});
+			var ronaldQuery = "SELECT * FROM events WHERE eventId = '" + eventId + "';";
+			sql.query(ronaldQuery, function (err, ronaldSet)) {
+				if (err) {
+					console.log(err);
+				} else {
+					res.send({
+						ronaldSet: ronaldSet,
+						checks: recordSet
+					});
+				}
+			}
 		}
 	});
 }
