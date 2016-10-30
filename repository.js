@@ -4,6 +4,7 @@ var fs = require('fs');
 var twilioConfig = JSON.parse(fs.readFileSync('./config/twilioConfig.json', 'utf8'));
 var mysqlConfig = JSON.parse(fs.readFileSync('./config/mysqlConfig.json', 'utf8'));
 var http = require('http');
+var io;
 
 var twilio = require('twilio')(twilioConfig.accountSid, twilioConfig.authToken);
 
@@ -34,7 +35,7 @@ var testMessage = function () {
 	});
 }
 
-var logTwilioInbound = function (checkinNumber, content) {
+var logTwilioInbound = function (checkinNumber, content, io) {
 	var currentTime = new Date();
 	content = content.trim();
 	var eventId = content.substring(0, 3);
@@ -54,7 +55,11 @@ var logTwilioInbound = function (checkinNumber, content) {
 						console.log(err);
 					} else {
 						sendTwilioConfirmation(checkinNumber);
-
+						var check = {
+							number: checkinNumber,
+							content: cleanContent
+						}
+						io.sockets.emit(eventId, check);
 					}
 				});
 			} else {
@@ -157,5 +162,33 @@ var createEventFinal = function (eventId, adminId, name, description, dateStart,
 	});
 }
 
+var getAdminPage = function (adminId, res) {
+	var query = "SELECT eventId, name, description, checkStart, checkEnd FROM events WHERE adminId = '" + adminId "';";
+	var queryCounts = "SELECT eventId, count(*) from check_ins GROUP BY eventId";
+	sql.query(query, function (err, recordSet) {
+		if (err) {
+			console.log(err);
+		} else {
+			sql.query(queryCounts, function (err, countSet) {
+				if (err) {
+					console.log(err);
+				} else {
+					_.forEach(recordSet, function (record) {
+						_.forEach(countSet, function (count) {
+							if (record.eventId == count.eventId) {
+								record.count = count.count(*);
+							}
+						});
+					});
+					res.send({
+						events: recordSet
+					});
+				}
+			});
+		}
+	})
+}
+
 module.exports.logTwilioInbound = logTwilioInbound;
 module.exports.createEvent = createEvent;
+module.exports.getAdminPage = getAdminPage;
