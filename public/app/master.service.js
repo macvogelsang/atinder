@@ -25,6 +25,13 @@ var MasterService = (function () {
             .then(function (res) { return res; })
             .catch(function (err) { return console.log(err); });
     };
+    MasterService.prototype.getAdminDashboard = function (adminId) {
+        return this.http
+            .post('/getAdminPage', adminId)
+            .toPromise()
+            .then(function (res) { return res; })
+            .catch(function (err) { return console.log(err); });
+    };
     MasterService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

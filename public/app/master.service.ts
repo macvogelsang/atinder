@@ -16,4 +16,11 @@ export class MasterService {
 		.then(res => res)
 		.catch(err => console.log(err));
 	}
+	getAdminDashboard(adminId){
+		return this.http
+		.post('/getAdminPage', adminId)
+		.toPromise()
+		.then(res => res)
+		.catch(err => console.log(err));
+	}
 }

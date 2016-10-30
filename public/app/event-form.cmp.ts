@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Event }    from './event';
 import {MasterService} from './master.service';
@@ -11,7 +11,7 @@ import {MasterService} from './master.service';
 })
 export class EventFormCmp {
     datesValid: boolean = true;
-    adminId;
+    @Input() adminId;
 
 	tempDateStart;
 	tempDateEnd;
@@ -69,6 +69,7 @@ export class EventFormCmp {
   submitted = false;
   onSubmit() {
 	  this.submitted = true;
+      this.model.adminId = this.adminId; 
       this.datesValid = this.updateDates()
       if (this.datesValid){
           this.service.createEvent(this.model).then(res => {
