@@ -39,8 +39,7 @@
       margin: 0px auto;
       display: inline-block; }
 
-.dashboard-header,
-.dashboard-events {
+.dashboard-header {
   text-align: center;
   border-bottom: 2px solid #5cb85c;
   margin-bottom: 30px; }
