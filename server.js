@@ -27,7 +27,7 @@ app.post('/createEvent', function (req, res) {
 	var dateEnd = req.body.dateEnd;
 	var checkStart = req.body.checkStart;
 	var checkEnd = req.body.checkEnd;
-	repository.createEvent(adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+	repository.createEvent(adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
 });
 
 app.listen(port, function () {

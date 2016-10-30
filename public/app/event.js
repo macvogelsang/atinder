@@ -1,7 +1,6 @@
 "use strict";
 var Event = (function () {
-    function Event(eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd) {
-        this.eventId = eventId;
+    function Event(adminId, name, description, dateStart, dateEnd, checkStart, checkEnd) {
         this.adminId = adminId;
         this.name = name;
         this.description = description;

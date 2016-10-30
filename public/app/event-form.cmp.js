@@ -14,7 +14,7 @@ var master_service_1 = require('./master.service');
 var EventFormCmp = (function () {
     function EventFormCmp(service) {
         this.service = service;
-        this.model = new event_1.Event('', '', '', '', '', '', '', '');
+        this.model = new event_1.Event('', '', '', '', '', '', '');
         this.submitted = false;
     }
     EventFormCmp.prototype.onSubmit = function () {
