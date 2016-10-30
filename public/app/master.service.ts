@@ -34,6 +34,13 @@ export class MasterService {
 		.then(res => res)
 		.catch(err => console.log(err));
 	}
+	getUserCheckIn(adminId,phone) {
+		return this.http
+		.post('/api/getUserCheckIn', {adminId: adminId, number:phone})
+		.toPromise()
+		.then(res => res)
+		.catch(err => console.log(err));
+	}
 
 	getSocketCheckIns(eventId) {
 		var socket;
