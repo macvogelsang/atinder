@@ -6,7 +6,7 @@
 			<p>Text {{event?.eventId}} to (919) 666-2564 to sign in.</p>
 
 			<div class="user-info" *ngIf="userCheckIn !== ''">
-				<h4>Other events by you that this person went to:
+          <h4>Other events by you that this person went to:</h4>
 				<ul>
 					<li *ngFor="let obj of userCheckIn">Event Id: {{obj.eventId}} -- Content: {{obj.content}}</li>
 				</ul>
