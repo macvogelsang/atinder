@@ -15,11 +15,15 @@ $accent:#5cb85c;
 }
 
 .event-form {
-	max-width: 600px;
+	max-width: 700px;
 	margin: 0px auto;
 	text-align: center;
 	padding:20px 50px;
 	h3{
 		margin-bottom:30px;
+	}
+	.timepicker {
+		margin:0px auto;
+		display:inline-block;
 	}
 }
