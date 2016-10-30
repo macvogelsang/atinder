@@ -9,7 +9,7 @@ import {MasterService} from './master.service';
   providers: [MasterService]
 })
 export class EventFormCmp {
-  model = new Event('',
+  model = new Event(
   	 '',
   	 '',
   	 '',
