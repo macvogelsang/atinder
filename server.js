@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
 
 app.get('*', function (req, res) {
-	res.sendFile('./public/index.html');
+	res.sendFile('/public/index.html');
 });
 
 app.post('/twilio/response', function (req, res) {
@@ -19,7 +19,7 @@ app.post('/twilio/response', function (req, res) {
 	repository.logTwilioInbound(checkinNumber, content);
 });
 
-app.post('/createEvent', function (req, res)) {
+app.post('/createEvent', function (req, res) {
 	var adminId = req.body.adminId;
 	var name = req.body.name;
 	var description = req.body.description;
@@ -28,7 +28,7 @@ app.post('/createEvent', function (req, res)) {
 	var checkStart = req.body.checkStart;
 	var checkEnd = req.body.checkEnd;
 	repository.createEvent(adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
-}
+});
 
 app.listen(port, function () {
 	console.log("Server running at port " + port);

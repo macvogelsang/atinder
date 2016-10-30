@@ -128,7 +128,7 @@ var createEventAdminId = function (eventId, adminId, number, name, description, 
 					createEventFinal(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
 				}
 			}
-		}
+		});
 	} else {
 		createEventFinal(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
 	}
@@ -137,13 +137,13 @@ var createEventAdminId = function (eventId, adminId, number, name, description, 
 var createEventFinal = function (eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
 	name = escapeString(name);
 	description = escapeString(description);
-	var query = "INSERT INTO events (eventId, dateStart, dateEnd, checkStart, checkEnd, adminId, name, description, number) VALUES ('" + eventId + "', '" + dateStart + "', '" + dateEnd + "', '" + checkStart + "', '" + checkEnd + "', '" + adminId + "', '" + name + "', '" + description + "', " + number + ");");
+	var query = "INSERT INTO events (eventId, dateStart, dateEnd, checkStart, checkEnd, adminId, name, description, number) VALUES ('" + eventId + "', '" + dateStart + "', '" + dateEnd + "', '" + checkStart + "', '" + checkEnd + "', '" + adminId + "', '" + name + "', '" + description + "', " + number + ");";
 	sql.query(query, function (err, recordSet) {
 		if (err) {
 			console.log(err);
 		} else {
 			res.send({
-				adminId: adminId	
+				adminId: adminId
 			});
 		}
 	});
