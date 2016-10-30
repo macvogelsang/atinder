@@ -13,10 +13,11 @@ var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
 var master_service_1 = require("./master.service");
 var DashboardCmp = (function () {
-    function DashboardCmp(route, location, service) {
+    function DashboardCmp(route, location, service, router) {
         this.route = route;
         this.location = location;
         this.service = service;
+        this.router = router;
         this.events = [{
                 eventId: '23v',
                 name: 'Testing Event',
@@ -67,7 +68,7 @@ var DashboardCmp = (function () {
             templateUrl: 'app/dashboard.cmp.html',
             providers: [master_service_1.MasterService]
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, common_1.Location, master_service_1.MasterService])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, common_1.Location, master_service_1.MasterService, router_1.Router])
     ], DashboardCmp);
     return DashboardCmp;
 }());
