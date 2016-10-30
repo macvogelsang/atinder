@@ -74,7 +74,8 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 										number: checkinNumber,
 										content: cleanContent
 									}
-									io.sockets.emit(eventId, check);
+									console.log("Event emitted: " + eventId);
+									io.sockets.emit(eventId.toLowerCase(), check);
 								}
 							});
 						}

@@ -32,33 +32,20 @@ export class EventCmp implements OnInit{
                 this.checkins = res.json().checks;
                 this.event = res.json().ronaldSet[0];
 
-                // this.socketConnection = this.service.getSocketCheckIns(this.eventId).subscribe(res => {
-                this.socketConnection = this.getSocketCheckIns(this.eventId).subscribe(res => {
-                    console.log(res)
+                var socket;
+                socket = io();
+                socket.on(this.eventId.toLowerCase(), (data) => {
+                    console.log(data, 'inside socket')
                     for (var key in this.checkins) {
-                        if (this.checkins[key].number == res.number ){
-                            this.checkins[key].content = res.content
+                        if (this.checkins[key].number == data.number ){
+                            this.checkins[key].content = data.content;
                             return
                         }
                     }
-                    this.checkins.push(res);
-                })
+                    this.checkins.push(data);
+                });
             })
         });
-    }
-
-    getSocketCheckIns(eventId) {
-        let observable = new Observable(observer => {
-
-            this.socket = io();
-            this.socket.on(eventId, (data) => {
-                observer.next(data);
-            });
-            return () => {
-                this.socket.disconnect();
-            };
-        })
-        return observable;
     }
 
     getUser(number){
