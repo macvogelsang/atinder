@@ -47,22 +47,29 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 		if (err) {
 			console.log(err);
 		} else {
-			var checkStart = new Date(recordSet.checkStart);
-			var checkEnd = new Date(recordSet.checkEnd);
-			if (currentTime.getTime() >= checkStart.getTime() && currentTime.getTime() <= checkEnd.getTime()) {
-				var queryStore = "INSERT INTO check_ins (number, eventId, content) VALUES ('" + checkinNumber + "', '" + eventId + "', '" + cleanContent + "' )";
-				sql.query(queryStore, function (err, recordSet) {
-					if (err) {
-						console.log(err);
-					} else {
-						sendTwilioConfirmation(checkinNumber);
-						var check = {
-							number: checkinNumber,
-							content: cleanContent
+			console.dir(recordSet);
+			if (recordSet.length != 0) {
+				console.log("EventId for checkin found");
+				var checkStart = new Date(recordSet.checkStart);
+				var checkEnd = new Date(recordSet.checkEnd);
+				if (currentTime.getTime() >= checkStart.getTime() && currentTime.getTime() <= checkEnd.getTime()) {
+					var queryStore = "INSERT INTO check_ins (number, eventId, content) VALUES ('" + checkinNumber + "', '" + eventId + "', '" + cleanContent + "' )";
+					sql.query(queryStore, function (err, recordSet) {
+						if (err) {
+							console.log(err);
+						} else {
+							sendTwilioConfirmation(checkinNumber);
+							var check = {
+								number: checkinNumber,
+								content: cleanContent
+							}
+							//io.sockets.emit(eventId, check);
 						}
-						io.sockets.emit(eventId, check);
-					}
-				});
+					});
+				} else {
+					console.log("Time was not appropriate");
+					sendTwilioDeny(checkinNumber);
+				}
 			} else {
 				sendTwilioDeny(checkinNumber);
 			}
@@ -80,7 +87,7 @@ var sendTwilioConfirmation = function (checkinNumber) {
 			console.log("Twilio error");
 			console.log(err);
 		} else {
-			console.log("Message sent successfully");
+			console.log("Message Success sent successfully");
 		}
 	});
 }
@@ -95,7 +102,7 @@ var sendTwilioDeny = function (checkinNumber) {
 			console.log("Twilio error");
 			console.log(err);
 		} else {
-			console.log("Message sent successfully");
+			console.log("Message Deny sent successfully");
 		}
 	});
 }
