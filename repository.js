@@ -253,3 +253,4 @@ module.exports.logTwilioInbound = logTwilioInbound;
 module.exports.createEvent = createEvent;
 module.exports.getAdminPage = getAdminPage;
 module.exports.getEventPage = getEventPage;
+module.exports.getUserCheckIn = getUserCheckIn;
