@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import {MasterService} from "./master.service";
+import { Observable } from 'rxjs/Observable';
+
+declare var io: any;
 
 @Component({
   selector: 'event',
@@ -14,6 +17,7 @@ export class EventCmp implements OnInit{
     event;
     socketConnection;
     userCheckIn = "";
+    socket;
 
     constructor(private service: MasterService,
                 private route: ActivatedRoute) {
@@ -28,7 +32,8 @@ export class EventCmp implements OnInit{
                 this.checkins = res.json().checks;
                 this.event = res.json().ronaldSet[0];
 
-                this.socketConnection = this.service.getSocketCheckIns(this.eventId).subscribe(res => {
+                // this.socketConnection = this.service.getSocketCheckIns(this.eventId).subscribe(res => {
+                this.socketConnection = this.getSocketCheckIns(this.eventId).subscribe(res => {
                     console.log(res)
                     for (var key in this.checkins) {
                         if (this.checkins[key].number == res.number ){
@@ -40,6 +45,20 @@ export class EventCmp implements OnInit{
                 })
             })
         });
+    }
+
+    getSocketCheckIns(eventId) {
+        let observable = new Observable(observer => {
+
+            this.socket = io();
+            this.socket.on(eventId, (data) => {
+                observer.next(data);
+            });
+            return () => {
+                this.socket.disconnect();
+            };
+        })
+        return observable;
     }
 
     getUser(number){

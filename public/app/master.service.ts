@@ -43,10 +43,10 @@ export class MasterService {
 	}
 
 	getSocketCheckIns(eventId) {
-    var socket;
+		var socket;
 		let observable = new Observable(observer => {
 
-		  socket = io();
+			socket = io();
 			socket.on(eventId, (data) => {
 				observer.next(data);
 			});

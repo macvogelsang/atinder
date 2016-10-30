@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var master_service_1 = require("./master.service");
+var Observable_1 = require('rxjs/Observable');
 var EventCmp = (function () {
     function EventCmp(service, route) {
         this.service = service;
@@ -25,7 +26,8 @@ var EventCmp = (function () {
                 console.log(res.json());
                 _this.checkins = res.json().checks;
                 _this.event = res.json().ronaldSet[0];
-                _this.socketConnection = _this.service.getSocketCheckIns(_this.eventId).subscribe(function (res) {
+                // this.socketConnection = this.service.getSocketCheckIns(this.eventId).subscribe(res => {
+                _this.socketConnection = _this.getSocketCheckIns(_this.eventId).subscribe(function (res) {
                     console.log(res);
                     for (var key in _this.checkins) {
                         if (_this.checkins[key].number == res.number) {
@@ -37,6 +39,19 @@ var EventCmp = (function () {
                 });
             });
         });
+    };
+    EventCmp.prototype.getSocketCheckIns = function (eventId) {
+        var _this = this;
+        var observable = new Observable_1.Observable(function (observer) {
+            _this.socket = io();
+            _this.socket.on(eventId, function (data) {
+                observer.next(data);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return observable;
     };
     EventCmp.prototype.getUser = function (number) {
         var _this = this;
