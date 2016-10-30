@@ -1,7 +1,10 @@
 	<div class="home-content">
-		<h1>Text In</h1>
+		<span class="logo fa-stack fa-lg">
+			<i class="fa fa-comments fa-stack-2x"></i>
+			<i class="fa fa-check-square-o fa-stack-1x"></i>
+		</span><br><br>
+		<h1>TextIn</h1>
 		<h3>A simple app for taking event attendance via SMS</h3><br>
-		<img src="images/atinder.png"><br>
 		<button *ngIf="formHidden" (click)="showForm()" class="btn btn-success">Create Event</button>
 		<event-form [adminId]="" *ngIf="!formHidden"></event-form>
 	</div>

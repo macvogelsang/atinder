@@ -13,6 +13,16 @@ $lightback:#4e5d6c;
 .home-content {
 	text-align:center;
 	margin:50px 0px;
+	span.logo {
+		color:$accent;
+		font-size:90px;
+		.fa-stack-1x {
+			color: #2b3e50;
+			position: relative;
+			left: -15px;
+			top: -10px;
+		}
+	}
 	img {
 		margin:40px 0px;
 	}
@@ -85,5 +95,14 @@ $lightback:#4e5d6c;
 		padding:5px;
 		font-size:15px;
 		background:$lightback;
+	}
+}
+
+.footer {
+	border-top:2px solid $accent;
+	margin-top:250px;
+	text-align:center;
+	p {
+		margin:10px 0px
 	}
 }
