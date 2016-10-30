@@ -28,7 +28,7 @@ app.post('/twilio/response', function (req, res, io) {
 	repository.logTwilioInbound(checkinNumber, content);
 });
 
-app.post('/createEvent', function (req, res) {
+app.post('/api/createEvent', function (req, res) {
 	var adminId = req.body.adminId;
 	var name = req.body.name;
 	var description = req.body.description;
@@ -39,7 +39,7 @@ app.post('/createEvent', function (req, res) {
 	repository.createEvent(adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
 });
 
-app.post('/getAdminPage', function (req, res) {
+app.post('/api/getAdminPage', function (req, res) {
 	var adminId = req.body.adminId;
 	console.log(adminId);
 	repository.getAdminPage(adminId, res);
