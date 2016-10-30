@@ -16,6 +16,14 @@
 				<input type="text" class="form-control" id="description"
 				  [(ngModel)]="model.description" name="description">
 			</div>
+			<div class="row">
+
+				<div class="form-group col-md-6">
+					<label for="check start">Start check in time</label>
+					 <datepicker [(ngModel)]="tempDateStart" name="temDateStart" [minDate]="minDate" [showWeeks]="false"></datepicker>
+				</div>
+
+			</div>
 
 			<button type="submit"  [disabled]="!eventForm.form.valid" class="btn btn-success">Create</button>
 		</fieldset>
