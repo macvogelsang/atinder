@@ -17,6 +17,24 @@ export class DashboardCmp implements OnInit{
         description:'This is a very long description',
         checkStart:new Date(),
         checkEnd: new Date()
+    },{
+        eventId:'563',
+        name:'Testing Event 2',
+        description:'This is a very long description',
+        checkStart:new Date(),
+        checkEnd: new Date()
+    },{
+        eventId:'23v',
+        name:'Testing Event',
+        description:'This is a very long description',
+        checkStart:new Date(),
+        checkEnd: new Date()
+    },{
+        eventId:'563',
+        name:'Testing Event 2',
+        description:'This is a very long description',
+        checkStart:new Date(),
+        checkEnd: new Date()
     }];
     formHidden: boolean = true;
 
