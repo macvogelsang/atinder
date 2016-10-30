@@ -9,9 +9,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
 
-app.get('*', function (req, res) {
-	res.sendFile('/public/index.html');
-});
+//app.get('*', function (req, res) {
+//	res.sendFile('/public/index.html');
+//});
 
 app.post('/twilio/response', function (req, res) {
 	var checkinNumber = req.body.From;
