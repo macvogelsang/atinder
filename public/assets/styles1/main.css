@@ -57,4 +57,13 @@
 .event-panel:focus {
   border-color: #fff; }
 
+.event {
+  text-align: center; }
+  .event h1 {
+    border-bottom: 2px solid #5cb85c; }
+  .event p.response {
+    display: inline-block;
+    margin: 10px;
+    background: #4e5d6c; }
+
 /*# sourceMappingURL=main.css.map */

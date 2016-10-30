@@ -1,12 +1,14 @@
-<div class="wrapper-top">
+<div class="wrapper-top event">
 	<div class="row">
+		<h1>{{event?.name | uppercase}}</h1>
 		<div class="col-md-6">
-			<h1>{{event?.name | uppercase}}</h1>
+			<!-- <p class="back" (click)="back()"><< Back to Dashboard</p> -->
 			<p>{{event?.description}}</p>
 			<p>Text {{event?.eventId}} to (919) 666-2564 to sign in.</p>
+			<p>Check in starts at {{event?.checkStart | date:'short'}}, and ends at {{event?.checkEnd | date:'short'}}</p>
 
 			<div class="user-info" *ngIf="userCheckIn !== ''">
-          <h4>Other events by you that this person went to:</h4>
+				<h4>Other events by you that this person went to:</h4>
 				<ul>
 					<li *ngFor="let obj of userCheckIn">Event Id: {{obj.eventId}} -- Content: {{obj.content}}</li>
 				</ul>

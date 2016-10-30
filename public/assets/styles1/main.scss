@@ -73,3 +73,15 @@ $lightback:#4e5d6c;
 .event-panel:focus {
 	border-color:#fff;
 }
+
+.event {
+	text-align: center;
+	h1 {
+		border-bottom:2px solid $accent;
+	}
+	p.response {
+		display:inline-block;
+		margin:10px;
+		background:$lightback;
+	}
+}
