@@ -1,4 +1,4 @@
-<div class="wrapper-top event">
+<div class="event">
 	<div class="row">
 		<h1>{{event?.name | uppercase}}</h1>
 		<div class="col-md-6">
@@ -8,11 +8,11 @@
 				<p style="font-weight:bold;">Text {{event?.eventId}} to (919) 666-2564 to sign in.</p>
 				<p>Check in starts at {{event?.checkStart | date:'short'}}<br>and ends at {{event?.checkEnd | date:'short'}}</p>
 			</div>
-			<div class="well" style="font-size:26px;">{{checkins.length}}</div>
+			<div class="well" style="font-size:26px;">{{checkins?.length}} people texted in</div>
 			<div class="user-info well" *ngIf="userCheckIn !== ''">
-				<h4>Other events by you that this person went to:</h4>
+				<h4>Other events by you this admin that this person went to:</h4>
 				<ul>
-					<li *ngFor="let event of userCheckIn.events">Event Id: {{event.eventId}} -- Name: {{event.name}}</li>
+					<li *ngFor="let event of userCheckIn?.events">Event Id: {{event.eventId}} -- Name: {{event.name}}</li>
 				</ul>
 			</div>
 		</div>
