@@ -17,6 +17,7 @@ var EventFormCmp = (function () {
         this.service = service;
         this.router = router;
         this.datesValid = true;
+        this.adminId = "";
         this.model = new event_1.Event('', '', '', '', '', '', '');
         this.minDate = new Date();
         this.submitted = false;
@@ -49,6 +50,7 @@ var EventFormCmp = (function () {
     EventFormCmp.prototype.onSubmit = function () {
         var _this = this;
         this.submitted = true;
+        this.model.adminId = this.adminId;
         this.datesValid = this.updateDates();
         if (this.datesValid) {
             this.service.createEvent(this.model).then(function (res) {

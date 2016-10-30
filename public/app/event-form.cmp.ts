@@ -11,7 +11,7 @@ import {MasterService} from './master.service';
 })
 export class EventFormCmp {
     datesValid: boolean = true;
-    @Input() adminId;
+    @Input() adminId = "";
 
 	tempDateStart;
 	tempDateEnd;
@@ -69,7 +69,7 @@ export class EventFormCmp {
   submitted = false;
   onSubmit() {
 	  this.submitted = true;
-      this.model.adminId = this.adminId; 
+      this.model.adminId = this.adminId;
       this.datesValid = this.updateDates()
       if (this.datesValid){
           this.service.createEvent(this.model).then(res => {

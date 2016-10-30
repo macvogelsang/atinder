@@ -4,8 +4,8 @@
 	<div *ngFor="let event of events" class="row event-panel">
 		<h4>{{event.name}} | {{event.eventId}}</h4>
 		<p>{{event.description}}</p>
-		<p>Start time: {{event.checkStart | 'shortDate'}}</p>
-		<p>End time: {{event.checkEnd | 'shortDate'}}</p>
+		<p>Start time: {{event.checkStart | date:'short'}}</p>
+		<p>End time: {{event.checkEnd | date:'short'}}</p>
 	</div>
 	<button *ngIf="formHidden" (click)="showForm()" class="btn btn-success">Create Event</button>
 	<event-form [adminId]="adminId" *ngIf="!formHidden"></event-form>
