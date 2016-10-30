@@ -163,23 +163,25 @@ var createEventFinal = function (eventId, adminId, name, description, dateStart,
 }
 
 var getAdminPage = function (adminId, res) {
-	var query = "SELECT eventId, name, description, checkStart, checkEnd FROM events WHERE adminId = '" + adminId "';";
-	var queryCounts = "SELECT eventId, count(*) from check_ins GROUP BY eventId";
+	var query = "SELECT eventId, name, description, checkStart, checkEnd FROM events WHERE adminId = '" + adminId + "';";
+	var queryCounts = "SELECT eventId, count AS count from check_ins GROUP BY eventId";
 	sql.query(query, function (err, recordSet) {
 		if (err) {
 			console.log(err);
 		} else {
 			sql.query(queryCounts, function (err, countSet) {
+				console.dir(countSet);
 				if (err) {
 					console.log(err);
 				} else {
 					_.forEach(recordSet, function (record) {
 						_.forEach(countSet, function (count) {
 							if (record.eventId == count.eventId) {
-								record.count = count.count(*);
+								record.count = count.count;
 							}
 						});
 					});
+					console.dir(recordSet);
 					res.send({
 						events: recordSet
 					});
