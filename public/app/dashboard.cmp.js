@@ -17,6 +17,13 @@ var DashboardCmp = (function () {
         this.route = route;
         this.location = location;
         this.service = service;
+        this.events = [{
+                eventId: '23v',
+                name: 'Testing Event',
+                description: 'This is a very long description',
+                checkStart: new Date(),
+                checkEnd: new Date()
+            }];
         this.formHidden = true;
     }
     DashboardCmp.prototype.ngOnInit = function () {

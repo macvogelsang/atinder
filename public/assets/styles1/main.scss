@@ -27,3 +27,9 @@ $accent:#5cb85c;
 		display:inline-block;
 	}
 }
+
+.dashboard-header {
+	text-align: center;
+	border-bottom:2px solid $accent;
+	margin-bottom: 30px;
+}
