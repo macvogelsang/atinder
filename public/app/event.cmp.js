@@ -26,7 +26,7 @@ var EventCmp = (function () {
                 _this.event = res.json().ronaldSet[0];
                 _this.socketConnection = _this.service.getSocketCheckIns(_this.eventId).subscribe(function (res) {
                     console.log(res);
-                    // this.messages.push(res);
+                    _this.checkins.push(res);
                 });
             });
         });

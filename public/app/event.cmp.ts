@@ -29,7 +29,7 @@ export class EventCmp implements OnInit{
 
                 this.socketConnection = this.service.getSocketCheckIns(this.eventId).subscribe(res => {
                     console.log(res)
-                    // this.messages.push(res);
+                    this.checkins.push(res);
                 })
             })
         });
