@@ -96,7 +96,7 @@ var generateId = function (digits) {
     return text;
 }
 
-var createEvent = function (adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
+var createEvent = function (adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
 	var possibleId = generateId(3);
     var query = "SELECT * FROM events WHERE eventId = '" + possibleId + "';";
     sql.query(query, function (err, recordSet) {
@@ -104,16 +104,16 @@ var createEvent = function (adminId, number, name, description, dateStart, dateE
     		console.log(err);
     	} else {
     		if (recordSet.length != 0) {
-    			createEvent(adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+    			createEvent(adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
     		} else {
     			eventId = possibleId;
-    			createEventAdminId(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+    			createEventAdminId(eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
     		}
     	}
     });
 }
 
-var createEventAdminId = function (eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
+var createEventAdminId = function (eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
 	if (adminId == "") {
 		var possibleId = generateId(6);
 		var query = "SELECT * FROM events WHERE adminId = '" + possibleId + "';";
@@ -122,19 +122,20 @@ var createEventAdminId = function (eventId, adminId, number, name, description, 
 				console.log(err);
 			} else {
 				if (recordSet != 0) {
-					createEventAdminId(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+					createEventAdminId(eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
 				} else {
 					adminId = possibleId;
-					createEventFinal(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+					createEventFinal(eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
 				}
 			}
 		});
 	} else {
-		createEventFinal(eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
+		createEventFinal(eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res);
 	}
 }
 
-var createEventFinal = function (eventId, adminId, number, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
+var createEventFinal = function (eventId, adminId, name, description, dateStart, dateEnd, checkStart, checkEnd, res) {
+	var number = "19196662564";
 	name = escapeString(name);
 	description = escapeString(description);
 	var query = "INSERT INTO events (eventId, dateStart, dateEnd, checkStart, checkEnd, adminId, name, description, number) VALUES ('" + eventId + "', '" + dateStart + "', '" + dateEnd + "', '" + checkStart + "', '" + checkEnd + "', '" + adminId + "', '" + name + "', '" + description + "', " + number + ");";
