@@ -55,7 +55,7 @@ export class DashboardCmp implements OnInit{
         });
     }
     gotoEvent(eventId){
-        let link = ['/event/:eventid', eventId];
+        let link = ['/event/', eventId];
         this.router.navigate(link);
     }
     showForm(){
