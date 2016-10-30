@@ -222,7 +222,7 @@ var getEventPage = function (eventId, res) {
 			console.log(err);
 		} else {
 			var ronaldQuery = "SELECT * FROM events WHERE eventId = '" + eventId + "';";
-			sql.query(ronaldQuery, function (err, ronaldSet)) {
+			sql.query(ronaldQuery, function (err, ronaldSet) {
 				if (err) {
 					console.log(err);
 				} else {
@@ -231,7 +231,7 @@ var getEventPage = function (eventId, res) {
 						checks: recordSet
 					});
 				}
-			}
+			});
 		}
 	});
 }
