@@ -45,6 +45,11 @@ app.post('/api/getAdminPage', function (req, res) {
 	repository.getAdminPage(adminId, res);
 });
 
+app.post('/api/getEventPage', function (req, res) {
+	var eventId = req.body.eventId;
+	repository.getEventPage(eventId, res);
+});
+
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/index.html'));
 });

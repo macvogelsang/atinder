@@ -60,6 +60,7 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 						} else {
 							sendTwilioConfirmation(checkinNumber);
 							var check = {
+								eventId: eventId,
 								number: checkinNumber,
 								content: cleanContent
 							}
@@ -202,6 +203,20 @@ var getAdminPage = function (adminId, res) {
 	})
 }
 
+var getEventPage = function (eventId, res) {
+	var query = "SELECT * FROM check_ins WHERE eventId = '" + eventId + "';";
+	sql.query(query, function (err, recordSet) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send({
+				checks: recordSet
+			});
+		}
+	});
+}
+
 module.exports.logTwilioInbound = logTwilioInbound;
 module.exports.createEvent = createEvent;
 module.exports.getAdminPage = getAdminPage;
+module.exports.getEventPage = getEventPage;
