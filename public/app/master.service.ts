@@ -18,7 +18,7 @@ export class MasterService {
 	}
 	getAdminDashboard(adminId){
 		return this.http
-		.post('/getAdminPage', adminId)
+    .post('/getAdminPage', {adminId: adminId})
 		.toPromise()
 		.then(res => res)
 		.catch(err => console.log(err));

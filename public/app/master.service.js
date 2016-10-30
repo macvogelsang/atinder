@@ -27,7 +27,7 @@ var MasterService = (function () {
     };
     MasterService.prototype.getAdminDashboard = function (adminId) {
         return this.http
-            .post('/getAdminPage', adminId)
+            .post('/getAdminPage', { adminId: adminId })
             .toPromise()
             .then(function (res) { return res; })
             .catch(function (err) { return console.log(err); });

@@ -164,12 +164,15 @@ var createEventFinal = function (eventId, adminId, name, description, dateStart,
 }
 
 var getAdminPage = function (adminId, res) {
+	console.log("Getting the admin page");
 	var query = "SELECT eventId, name, description, checkStart, checkEnd FROM events WHERE adminId = '" + adminId + "';";
+	console.log(query);
 	var queryCounts = "SELECT eventId, count(*) AS count from check_ins GROUP BY eventId";
 	sql.query(query, function (err, recordSet) {
 		if (err) {
 			console.log(err);
 		} else {
+			console.dir(recordSet);
 			sql.query(queryCounts, function (err, countSet) {
 				console.dir(countSet);
 				if (err) {

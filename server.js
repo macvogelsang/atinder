@@ -41,6 +41,7 @@ app.post('/createEvent', function (req, res) {
 
 app.post('/getAdminPage', function (req, res) {
 	var adminId = req.body.adminId;
+	console.log(adminId);
 	repository.getAdminPage(adminId, res);
 });
 
