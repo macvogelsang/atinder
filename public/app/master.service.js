@@ -40,15 +40,22 @@ var MasterService = (function () {
             .then(function (res) { return res; })
             .catch(function (err) { return console.log(err); });
     };
+    MasterService.prototype.getUserCheckIn = function (adminId, phone) {
+        return this.http
+            .post('/api/getUserCheckIn', { adminId: adminId, number: phone })
+            .toPromise()
+            .then(function (res) { return res; })
+            .catch(function (err) { return console.log(err); });
+    };
     MasterService.prototype.getSocketCheckIns = function (eventId) {
-        var _this = this;
+        var socket;
         var observable = new Observable_1.Observable(function (observer) {
-            _this.socket = io();
-            _this.socket.on(eventId, function (data) {
+            socket = io();
+            socket.on(eventId, function (data) {
                 observer.next(data);
             });
             return function () {
-                _this.socket.disconnect();
+                socket.disconnect();
             };
         });
         return observable;

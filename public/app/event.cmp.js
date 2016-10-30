@@ -15,6 +15,7 @@ var EventCmp = (function () {
     function EventCmp(service, route) {
         this.service = service;
         this.route = route;
+        this.userCheckIn = "";
     }
     EventCmp.prototype.ngOnInit = function () {
         var _this = this;
@@ -29,6 +30,13 @@ var EventCmp = (function () {
                     _this.checkins.push(res);
                 });
             });
+        });
+    };
+    EventCmp.prototype.getUser = function (number) {
+        var _this = this;
+        this.service.getUserCheckIn(this.event.adminId, number).then(function (res) {
+            console.log(res.json());
+            _this.userCheckIn = res.json().userCheckIn;
         });
     };
     EventCmp = __decorate([

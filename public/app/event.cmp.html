@@ -1,12 +1,21 @@
 <div class="wrapper-top">
-	<div class="row dashboard-header">
-		<h1>{{event?.name | uppercase}}</h1>
-		<p>{{event?.description}}</p>
-		<p>Text {{event?.eventId}} to (919) 666-2564 to sign in.</p>
-	</div>
-	<div class="row dashboard-events">
-		<div *ngFor="let response of checkins">
-			<p class="response">{{response.number}} -- {{response.content}}</p>
+	<div class="row">
+		<div class="col-md-6">
+			<h1>{{event?.name | uppercase}}</h1>
+			<p>{{event?.description}}</p>
+			<p>Text {{event?.eventId}} to (919) 666-2564 to sign in.</p>
+
+			<div class="user-info" *ngIf="userCheckIn !== ''">
+				<h4>Other events by you that this person went to:
+				<ul>
+					<li *ngFor="let obj of userCheckIn">Event Id: {{obj.eventId}} -- Content: {{obj.content}}</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-6 text-center">
+			<div *ngFor="let response of checkins">
+				<p class="response" (click)="getUser(response.number)">{{response.number}} -- {{response.content}}</p>
+			</div>
 		</div>
 	</div>
 </div>

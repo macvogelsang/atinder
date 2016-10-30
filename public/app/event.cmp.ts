@@ -13,6 +13,7 @@ export class EventCmp implements OnInit{
     eventId;
     event;
     socketConnection;
+    userCheckIn = "";
 
     constructor(private service: MasterService,
                 private route: ActivatedRoute) {
@@ -33,5 +34,12 @@ export class EventCmp implements OnInit{
                 })
             })
         });
+    }
+
+    getUser(number){
+        this.service.getUserCheckIn(this.event.adminId, number).then(res => {
+            console.log(res.json())
+            this.userCheckIn = res.json().userCheckIn;
+        })
     }
 }

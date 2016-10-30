@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Router, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import {MasterService} from "./master.service";
 
@@ -40,7 +40,8 @@ export class DashboardCmp implements OnInit{
 
     constructor(private route: ActivatedRoute,
                 private location: Location,
-                private service: MasterService) {
+                private service: MasterService,
+                private router: Router) {
 
     }
 
@@ -53,7 +54,10 @@ export class DashboardCmp implements OnInit{
             })
         });
     }
-
+    gotoEvent(eventId){
+        let link = ['/event/:eventid', eventId];
+        this.router.navigate(link);
+    }
     showForm(){
         this.formHidden = false;
     }
