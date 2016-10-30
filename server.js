@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
 
 
 var http = require('http');
@@ -43,6 +44,10 @@ app.post('/getAdminPage', function (req, res) {
 	var adminId = req.body.adminId;
 	console.log(adminId);
 	repository.getAdminPage(adminId, res);
+});
+
+app.get('*', function(req, res) {
+	res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 server.listen(port, function () {
