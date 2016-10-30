@@ -22,10 +22,10 @@ app.use(bodyParser.json());
 //	res.sendFile('/public/index.html');
 //});
 
-app.post('/twilio/response', function (req, res, io) {
+app.post('/twilio/response', function (req, res) {
 	var checkinNumber = req.body.From;
 	var content = req.body.Body;
-	repository.logTwilioInbound(checkinNumber, content);
+	repository.logTwilioInbound(checkinNumber, content, io);
 });
 
 app.post('/api/createEvent', function (req, res) {
