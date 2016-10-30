@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/toPromise');
-// import * as io from 'socket.io-client/socket.io';
 var MasterService = (function () {
     // private headers = new Headers({'Content-Type': 'application/json'});
     function MasterService(http) {
@@ -39,6 +39,19 @@ var MasterService = (function () {
             .toPromise()
             .then(function (res) { return res; })
             .catch(function (err) { return console.log(err); });
+    };
+    MasterService.prototype.getSocketCheckIns = function (eventId) {
+        var _this = this;
+        var observable = new Observable_1.Observable(function (observer) {
+            _this.socket = io();
+            _this.socket.on(eventId, function (data) {
+                observer.next(data);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return observable;
     };
     MasterService = __decorate([
         core_1.Injectable(), 

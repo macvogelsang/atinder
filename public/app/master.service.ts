@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-// import * as io from 'socket.io-client/socket.io';
+// import * as io from 'socket.io-client';
+declare var io: any;
 
 @Injectable()
 export class MasterService {
@@ -30,5 +33,20 @@ export class MasterService {
 		.toPromise()
 		.then(res => res)
 		.catch(err => console.log(err));
+	}
+
+	private socket;
+
+	getSocketCheckIns(eventId) {
+		let observable = new Observable(observer => {
+			this.socket = io();
+			this.socket.on(eventId, (data) => {
+				observer.next(data);
+			});
+			return () => {
+				this.socket.disconnect();
+			};
+		})
+		return observable;
 	}
 }

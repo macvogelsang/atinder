@@ -12,6 +12,7 @@ export class EventCmp implements OnInit{
     checkins;
     eventId;
     event;
+    socketConnection;
 
     constructor(private service: MasterService,
                 private route: ActivatedRoute) {
@@ -25,6 +26,11 @@ export class EventCmp implements OnInit{
                 console.log(res.json())
                 this.checkins = res.json().checks;
                 this.event = res.json().ronaldSet[0];
+
+                this.socketConnection = this.service.getSocketCheckIns(this.eventId).subscribe(res => {
+                    console.log(res)
+                    // this.messages.push(res);
+                })
             })
         });
     }
