@@ -11,14 +11,14 @@ export class MasterService {
 	constructor(private http: Http) { }
 	createEvent(event) {
 		return this.http
-		.post('/createEvent', event)
+		.post('/api/createEvent', event)
 		.toPromise()
 		.then(res => res)
 		.catch(err => console.log(err));
 	}
 	getAdminDashboard(adminId){
 		return this.http
-    .post('/getAdminPage', {adminId: adminId})
+    	.post('/api/getAdminPage', {adminId: adminId})
 		.toPromise()
 		.then(res => res)
 		.catch(err => console.log(err));

@@ -11,7 +11,13 @@ import {MasterService} from "./master.service";
 export class DashboardCmp implements OnInit{
 
     adminId:string;
-    events;
+    events = [{
+        eventId:'23v',
+        name:'Testing Event',
+        description:'This is a very long description',
+        checkStart:new Date(),
+        checkEnd: new Date()
+    }];
     formHidden: boolean = true;
 
     constructor(private route: ActivatedRoute,
