@@ -4,6 +4,6 @@
 		<h3>A simple app for taking event attendance via SMS</h3><br>
 		<img src="images/atinder.png"><br>
 		<button *ngIf="formHidden" (click)="showForm()" class="btn btn-success">Create Event</button>
-		<event-form *ngIf="!formHidden"></event-form>
+		<event-form [adminId]="" *ngIf="!formHidden"></event-form>
 	</div>
 </div>

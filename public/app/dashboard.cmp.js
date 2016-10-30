@@ -11,25 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
+var master_service_1 = require("./master.service");
 var DashboardCmp = (function () {
-    function DashboardCmp(route, location) {
+    function DashboardCmp(route, location, service) {
         this.route = route;
         this.location = location;
+        this.service = service;
+        this.formHidden = true;
     }
     DashboardCmp.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.forEach(function (params) {
             _this.adminId = params['id'];
-            // this.heroService.getHero(id)
-            // .then(hero => this.hero = hero);
+            _this.service.getAdminDashboard(_this.adminId).then(function (res) {
+                console.log(res.json());
+                _this.events = res.json().events;
+            });
         });
+    };
+    DashboardCmp.prototype.showForm = function () {
+        this.formHidden = false;
     };
     DashboardCmp = __decorate([
         core_1.Component({
             selector: 'dashboard',
-            templateUrl: 'app/dashboard.cmp.html'
+            templateUrl: 'app/dashboard.cmp.html',
+            providers: [master_service_1.MasterService]
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, common_1.Location])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, common_1.Location, master_service_1.MasterService])
     ], DashboardCmp);
     return DashboardCmp;
 }());

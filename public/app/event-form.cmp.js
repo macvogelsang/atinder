@@ -65,6 +65,10 @@ var EventFormCmp = (function () {
         enumerable: true,
         configurable: true
     });
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], EventFormCmp.prototype, "adminId", void 0);
     EventFormCmp = __decorate([
         core_1.Component({
             moduleId: module.id,
