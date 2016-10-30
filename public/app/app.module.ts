@@ -23,8 +23,8 @@ import {EventFormCmp} from './event-form.cmp';
       DatepickerModule,
       TimepickerModule,
       RouterModule.forRoot([
-          { path: 'event/:id', component: EventCmp },
-          { path: ':id', component: DashboardCmp },
+          { path: 'event/:eventid', component: EventCmp },
+          { path: ':adminid', component: DashboardCmp },
           { path: '', component: HomeCmp },
           { path: '**', component: HomeCmp }
       ]),

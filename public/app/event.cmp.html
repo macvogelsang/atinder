@@ -1,1 +1,12 @@
-<h1>Event Page {{eventId}} </h1>
+<div class="wrapper-top">
+	<div class="row dashboard-header">
+		<h1>{{event.name | uppercase}}</h1>
+		<p>{{event.description}}</p>
+		<p>Text {{event.eventId}} to (919) 666-2564 to sign in.</p>
+	</div>
+	<div class="row dashboard-events">
+		<div *ngFor="let response of checkins">
+			<p class="response">{{response.number}} -- {{response.content}}</p>
+		</div>
+	</div>
+</div>

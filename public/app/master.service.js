@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 require('rxjs/add/operator/toPromise');
+// import * as io from 'socket.io-client/socket.io';
 var MasterService = (function () {
     // private headers = new Headers({'Content-Type': 'application/json'});
     function MasterService(http) {
@@ -28,6 +29,13 @@ var MasterService = (function () {
     MasterService.prototype.getAdminDashboard = function (adminId) {
         return this.http
             .post('/api/getAdminPage', { adminId: adminId })
+            .toPromise()
+            .then(function (res) { return res; })
+            .catch(function (err) { return console.log(err); });
+    };
+    MasterService.prototype.getInitialCheckIns = function (eventId) {
+        return this.http
+            .post('/api/getEventPage', { eventId: eventId })
             .toPromise()
             .then(function (res) { return res; })
             .catch(function (err) { return console.log(err); });

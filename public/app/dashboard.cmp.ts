@@ -46,7 +46,7 @@ export class DashboardCmp implements OnInit{
 
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
-            this.adminId = params['id'];
+            this.adminId = params['adminid'];
             this.service.getAdminDashboard(this.adminId).then(res => {
                 console.log(res.json())
                 this.events = res.json().events;

@@ -25,7 +25,8 @@
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
       'ng2-bootstrap':             'npm:ng2-bootstrap',
-      'moment': 'npm:moment/moment.js'
+      'moment': 'npm:moment/moment.js',
+      'socket.io-client' : 'npm:socket.io-client'
 
     },
     // packages tells the System loader how to load when no filename and/or no extension
@@ -38,6 +39,7 @@
         defaultExtension: 'js'
       },
       'ng2-bootstrap':             { main: 'ng2-bootstrap.js', defaultExtension: 'js' },
+      'socket.io-client': {main:'socket.io.js', defaultExtension: 'js'},
       'angular-in-memory-web-api': {
         main: './index.js',
         defaultExtension: 'js'

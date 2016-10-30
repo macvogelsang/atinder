@@ -47,7 +47,7 @@ var DashboardCmp = (function () {
     DashboardCmp.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.forEach(function (params) {
-            _this.adminId = params['id'];
+            _this.adminId = params['adminid'];
             _this.service.getAdminDashboard(_this.adminId).then(function (res) {
                 console.log(res.json());
                 _this.events = res.json().events;

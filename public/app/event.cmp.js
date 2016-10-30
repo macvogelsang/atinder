@@ -9,15 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var master_service_1 = require("./master.service");
 var EventCmp = (function () {
-    function EventCmp() {
+    function EventCmp(service, route) {
+        this.service = service;
+        this.route = route;
     }
+    EventCmp.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.forEach(function (params) {
+            _this.eventId = params['eventid'];
+            _this.service.getInitialCheckIns(_this.eventId).then(function (res) {
+                console.log(res.json());
+                _this.checkins = res.json().checks;
+                _this.event = res.json().ronaldSet;
+            });
+        });
+    };
     EventCmp = __decorate([
         core_1.Component({
             selector: 'event',
-            templateUrl: 'app/event.cmp.html'
+            templateUrl: 'app/event.cmp.html',
+            providers: [master_service_1.MasterService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [master_service_1.MasterService, router_1.ActivatedRoute])
     ], EventCmp);
     return EventCmp;
 }());
