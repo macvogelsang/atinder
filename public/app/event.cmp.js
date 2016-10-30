@@ -23,7 +23,7 @@ var EventCmp = (function () {
             _this.service.getInitialCheckIns(_this.eventId).then(function (res) {
                 console.log(res.json());
                 _this.checkins = res.json().checks;
-                _this.event = res.json().ronaldSet;
+                _this.event = res.json().ronaldSet[0];
             });
         });
     };

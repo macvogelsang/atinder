@@ -24,7 +24,7 @@ export class EventCmp implements OnInit{
             this.service.getInitialCheckIns(this.eventId).then(res => {
                 console.log(res.json())
                 this.checkins = res.json().checks;
-                this.event = res.json().ronaldSet;
+                this.event = res.json().ronaldSet[0];
             })
         });
     }

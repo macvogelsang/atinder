@@ -74,7 +74,7 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 										number: checkinNumber,
 										content: cleanContent
 									}
-									io.sockets.emit(eventId, check);
+									//io.sockets.emit(eventId, check);
 								}
 							});
 						}
@@ -200,7 +200,7 @@ var getAdminPage = function (adminId, res) {
 				} else {
 					_.forEach(recordSet, function (record) {
 						_.forEach(countSet, function (count) {
-							if (record.eventId.toLowercase() == count.eventId.toLowercase()) {
+							if (record.eventId.toLowerCase() == count.eventId.toLowerCase()) {
 								record.count = count.count;
 							}
 						});
