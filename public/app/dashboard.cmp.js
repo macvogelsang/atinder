@@ -54,6 +54,10 @@ var DashboardCmp = (function () {
             });
         });
     };
+    DashboardCmp.prototype.gotoEvent = function (eventId) {
+        var link = ['/event/:eventid', eventId];
+        this.router.navigate(link);
+    };
     DashboardCmp.prototype.showForm = function () {
         this.formHidden = false;
     };

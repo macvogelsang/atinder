@@ -57,7 +57,12 @@ var EventFormCmp = (function () {
                 console.log(res.json());
                 _this.adminId = res.json().adminId;
                 var link = ['/', _this.adminId];
-                _this.router.navigate(link);
+                if (_this.router.url === '/' + _this.adminId) {
+                    location.reload();
+                }
+                else {
+                    _this.router.navigate(link);
+                }
             });
         }
     };

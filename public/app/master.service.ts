@@ -35,16 +35,16 @@ export class MasterService {
 		.catch(err => console.log(err));
 	}
 
-	private socket;
-
 	getSocketCheckIns(eventId) {
+		var socket;
 		let observable = new Observable(observer => {
-			this.socket = io();
-			this.socket.on(eventId, (data) => {
+
+			socket = io();
+			socket.on(eventId, (data) => {
 				observer.next(data);
 			});
 			return () => {
-				this.socket.disconnect();
+				socket.disconnect();
 			};
 		})
 		return observable;

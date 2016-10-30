@@ -76,7 +76,11 @@ export class EventFormCmp {
     		  console.log(res.json())
               this.adminId = res.json().adminId;
               let link = ['/', this.adminId];
-              this.router.navigate(link);
+              if (this.router.url === '/' + this.adminId){
+                  location.reload();
+              }else {
+                  this.router.navigate(link);
+              }
     	  })
       }
   }

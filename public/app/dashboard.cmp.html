@@ -5,7 +5,7 @@
 	</div>
 	<div class="row dashboard-events">
 		<div *ngFor="let event of events" class="col-md-4">
-			<div class="event-panel">
+			<div class="event-panel" (click)="gotoEvent(event.eventId)">
 				<h4>{{event.name}} [id:{{event.eventId}}]</h4>
 				<p class="desc">{{event.description}}</p>
 				<p class="time">Start time: {{event.checkStart | date:'short'}}</p>
