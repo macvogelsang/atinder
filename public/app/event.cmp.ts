@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
+import { ActivatedRoute, Params, Router }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import {MasterService} from "./master.service";
 import { Observable } from 'rxjs/Observable';
@@ -15,15 +15,51 @@ declare var json2csv: any;
   providers: [ MasterService ]
 })
 export class EventCmp implements OnInit{
-    checkins;
+    checkins = [
+        {
+            number:"11234567890",
+            content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+
+        },
+        {
+            number:"1234567890",
+            content:'Mac Voeu fugiat nulla pariatur. Excepteur sint occaecat cupidatat gelsang'
+        },
+        {
+            number:"1234567890",
+            content:'Mac Vogelsang 2'
+        },
+        {
+            number:"1234567890",
+            content:'Mac Vlore eu fugiat nulogelsang 3'
+        },
+        {
+            number:"11234567890",
+            content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+
+        },
+        {
+            number:"1234567890",
+            content:'Mac Voeu fugiat nulla pariatur. Excepteur sint occaecat cupidatat gelsang'
+        },
+        {
+            number:"1234567890",
+            content:'Mac Vogelsang 2'
+        },
+        {
+            number:"1234567890",
+            content:'Mac Vlore eu fugiat nulogelsang 3'
+        }
+    ];
     eventId;
     event;
     socketConnection;
+    selected;
     userCheckIn = "";
-    socket;
 
     constructor(private service: MasterService,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute
+                private router: Router) {
 
     }
 
@@ -35,6 +71,11 @@ export class EventCmp implements OnInit{
                 this.checkins = res.json().checks;
                 this.event = res.json().ronaldSet[0];
 
+                if (this.event == null){
+                    this.router.navigate('/notfound');
+                }
+
+
                 var socket;
                 socket = io();
                 socket.on(this.eventId.toLowerCase(), (data) => {
@@ -45,7 +86,7 @@ export class EventCmp implements OnInit{
                             return
                         }
                     }
-                    this.checkins.push(data);
+                    this.checkins.unshift(data);
                 });
             })
         });
@@ -68,9 +109,10 @@ export class EventCmp implements OnInit{
     }
 
     getUser(number){
+        this.selected = number;
         this.service.getUserCheckIn(this.event.adminId, number).then(res => {
             console.log(res.json())
-            this.userCheckIn = res.json().userCheckIn;
+            this.userCheckIn = res.json().events;
         })
     }
 }

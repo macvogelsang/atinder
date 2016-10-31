@@ -1,4 +1,19 @@
 /* Master Styles */
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px; }
+
+::-webkit-scrollbar-thumb {
+  background-color: #5cb85c;
+  border-radius: 0; }
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #c4c4c4; }
+
+::-webkit-scrollbar-track {
+  background-color: #2b3e50; }
+
+/* End Scrollbar */
 .row {
   margin: 0px; }
 
@@ -68,12 +83,40 @@
   text-align: center; }
   .event h1 {
     border-bottom: 2px solid #5cb85c; }
-  .event p.response {
-    display: inline-block;
-    margin: 10px;
-    padding: 5px;
-    font-size: 15px;
-    background: #4e5d6c; }
+  .event h3 {
+    margin: 10px 0px; }
+  .event .responses {
+    height: 700px;
+    overflow: auto; }
+    .event .responses .response {
+      display: block;
+      margin-bottom: 20px;
+      padding: 10px 0px;
+      font-size: 15px;
+      transition: 350ms;
+      cursor: pointer;
+      background: #4e5d6c;
+      border: 1px solid #4e5d6c;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; }
+      .event .responses .response span {
+        padding: 0px 10px; }
+      .event .responses .response span.res-content {
+        -webkit-box-flex: 2 auto;
+        -moz-box-flex: 2 auto;
+        -webkit-flex: 2 auto;
+        -ms-flex: 2 auto;
+        flex: 2 auto;
+        text-align: left; }
+    .event .responses .response:hover, .event .responses .response:focus {
+      border-color: #fff; }
+    .event .responses .response.active {
+      border-color: #5cb85c; }
 
 .footer {
   border-top: 2px solid #5cb85c;

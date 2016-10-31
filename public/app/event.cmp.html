@@ -4,22 +4,22 @@
 		<div class="col-md-6">
 			<!-- <p class="back" (click)="back()"><< Back to Dashboard</p> -->
 			<div class="well">
-				<p *ngIf="event?.description !== ''">Event Description: {{event?.description}}</p>
 				<h3>Text <b>{{event?.eventId}}</b> to <b>(919) 666-2564</b> to sign in.</h3>
+				<p *ngIf="event?.description !== ''">Event Description: {{event?.description}}</p>
 				<p>Check in starts at {{event?.checkStart | date:'short'}}<br>and ends at {{event?.checkEnd | date:'short'}}</p>
-				<button class="btn btn-success" (click)="exportCSV()"><i class="fa file-excel-o"></i> Export to CSV</button>
+				<button class="btn btn-success" (click)="exportCSV()"><i class="fa fa-file-excel-o"></i> Export to CSV</button>
 			</div>
-			<div class="well" style="font-size:26px;">{{checkins?.length}} people texted in</div>
+			<div class="well" style="font-size:26px;">{{checkins?.length}} {{checkins.length==1 ? 'person' : 'people'}} texted in</div>
 			<div class="user-info well" *ngIf="userCheckIn !== ''">
-				<h4>Other events by you this admin that this person went to:</h4>
+				<h4>This number attended the following events:</h4>
 				<ul>
-					<li *ngFor="let event of userCheckIn?.events">Event Id: {{event.eventId}} -- Name: {{event.name}}</li>
+					<li *ngFor="let event of userCheckIn">{{event.eventId}} -- {{event.name}}</li>
 				</ul>
 			</div>
 		</div>
-		<div class="col-md-6 text-center">
-			<div *ngFor="let response of checkins">
-				<p class="response" (click)="getUser(response.number)">{{response.number}} -- {{response.content}}</p>
+		<div class="col-md-6 text-center responses">
+			<div *ngFor="let response of checkins" [class.active]="selected == response.number" class="response" (click)="getUser(response.number)">
+				<span>{{response.number}}</span><span class="res-content">{{response.content}}</span>
 			</div>
 		</div>
 	</div>
