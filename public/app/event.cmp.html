@@ -4,7 +4,7 @@
 		<div class="col-md-6">
 			<!-- <p class="back" (click)="back()"><< Back to Dashboard</p> -->
 			<div class="well">
-				<p *ngIf="event.description !== ''">Event Description: {{event?.description}}</p>
+				<p *ngIf="event?.description !== ''">Event Description: {{event?.description}}</p>
 				<h3>Text <b>{{event?.eventId}}</b> to <b>(919) 666-2564</b> to sign in.</h3>
 				<p>Check in starts at {{event?.checkStart | date:'short'}}<br>and ends at {{event?.checkEnd | date:'short'}}</p>
 				<button class="btn btn-success" (click)="exportCSV()"><i class="fa file-excel-o"></i> Export to CSV</button>
