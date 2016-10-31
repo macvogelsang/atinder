@@ -86,7 +86,7 @@ var EventCmp = (function () {
     };
     EventCmp.prototype.exportCSV = function () {
         var filename = "event" + this.eventId + ".csv";
-        var fields = ['number', 'content'];
+        var fields = ['number', 'content', 'timestamp'];
         var csv = json2csv({ data: this.checkins, fields: fields });
         var element = document.createElement('a');
         element.setAttribute('href', 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv));
