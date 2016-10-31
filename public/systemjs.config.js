@@ -41,7 +41,7 @@
       },
       'ng2-bootstrap':             { main: 'ng2-bootstrap.js', defaultExtension: 'js' },
       'socket.io-client': {main:'./socket.io.js', defaultExtension: 'js'},
-      'json2csv':{main:'./bin/json2csv.js' defaultExtension: 'js'},
+      'json2csv':{main:'./bin/json2csv.js', defaultExtension: 'js'},
       'angular-in-memory-web-api': {
         main: './index.js',
         defaultExtension: 'js'
