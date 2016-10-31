@@ -3,8 +3,9 @@ import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import {MasterService} from "./master.service";
 import { Observable } from 'rxjs/Observable';
-
+// import {json2csv} from 'json2csv';
 declare var io: any;
+declare var json2csv: any;
 
 @Component({
   selector: 'event',
@@ -46,6 +47,22 @@ export class EventCmp implements OnInit{
                 });
             })
         });
+    }
+
+    exportCSV(){
+        var filename = "event"+this.eventId+".csv";
+        var fields = ['number','content'];
+        var csv = json2csv({ data: this.checkins, fields: fields });
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
     }
 
     getUser(number){

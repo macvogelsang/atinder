@@ -40,6 +40,18 @@ var EventCmp = (function () {
             });
         });
     };
+    EventCmp.prototype.exportCSV = function () {
+        var filename = "event" + this.eventId + ".csv";
+        var fields = ['number', 'content'];
+        var csv = json2csv({ data: this.checkins, fields: fields });
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    };
     EventCmp.prototype.getUser = function (number) {
         var _this = this;
         this.service.getUserCheckIn(this.event.adminId, number).then(function (res) {

@@ -26,7 +26,8 @@
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
       'ng2-bootstrap':             'npm:ng2-bootstrap',
       'moment': 'npm:moment/moment.js',
-      'socket.io-client' : 'npm:socket.io-client'
+      'socket.io-client' : 'npm:socket.io-client',
+      'json2csv': 'npm:json2csv'
 
     },
     // packages tells the System loader how to load when no filename and/or no extension
@@ -40,6 +41,7 @@
       },
       'ng2-bootstrap':             { main: 'ng2-bootstrap.js', defaultExtension: 'js' },
       'socket.io-client': {main:'./socket.io.js', defaultExtension: 'js'},
+      'json2csv':{main:'./bin/json2csv.js' defaultExtension: 'js'},
       'angular-in-memory-web-api': {
         main: './index.js',
         defaultExtension: 'js'
