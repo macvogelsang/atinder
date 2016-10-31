@@ -50,7 +50,7 @@ var EventCmp = (function () {
                 content: 'Mac Vlore eu fugiat nulogelsang 3'
             }
         ];
-        this.showpage = true;
+        this.showpage = false;
         this.userCheckIn = "";
     }
     EventCmp.prototype.ngOnInit = function () {
