@@ -1,6 +1,6 @@
 <div class="event" *ngIf="showpage">
 	<div class="row">
-		<h1>{{event?.name | uppercase}}</h1>
+		<h1><i title="Back to dashboard" [routerLink]="['/',adminId]" class="fa fa-chevron-left fa-pull-left"></i>{{event?.name | uppercase}}</h1>
 		<div class="col-md-6">
 			<!-- <p class="back" (click)="back()"><< Back to Dashboard</p> -->
 			<div class="well">

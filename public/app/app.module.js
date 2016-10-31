@@ -35,7 +35,7 @@ var AppModule = (function () {
                 datepicker_1.DatepickerModule,
                 timepicker_1.TimepickerModule,
                 router_1.RouterModule.forRoot([
-                    { path: 'event/:eventid', component: event_cmp_1.EventCmp },
+                    { path: ':adminid/:eventid', component: event_cmp_1.EventCmp },
                     { path: 'notfound', component: notfound_cmp_1.NotfoundCmp },
                     { path: ':adminid', component: dashboard_cmp_1.DashboardCmp },
                     { path: '', component: home_cmp_1.HomeCmp },

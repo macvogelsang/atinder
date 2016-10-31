@@ -142,6 +142,14 @@ a.styled-link:hover, focus {
 		border-bottom:4px solid $accent;
         margin-bottom:30px;
         font-size:50px;
+        .fa {
+            color:$accent;
+            transition:350ms;
+            cursor:pointer;
+        }
+        .fa:hover, .fa:focus {
+            opacity:0.7;
+        }
 	}
 	h3 {
 		margin:10px 0px;
@@ -171,10 +179,11 @@ a.styled-link:hover, focus {
 				text-align:left;
 			}
 		}
-        .response:hover, .response:focus, .response.active {
+        .response:hover, .response:focus{
             background:$lighterback;
         }
         .response.active {
+            border-color:$accent;
         }
 	}
 }

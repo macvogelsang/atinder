@@ -56,7 +56,7 @@ var DashboardCmp = (function () {
         });
     };
     DashboardCmp.prototype.gotoEvent = function (eventId) {
-        var link = ['/event/', eventId];
+        var link = ['/', this.adminId, eventId];
         this.router.navigate(link);
     };
     DashboardCmp.prototype.showForm = function () {

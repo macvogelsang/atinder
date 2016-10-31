@@ -50,18 +50,22 @@ var EventCmp = (function () {
                 content: 'Mac Vlore eu fugiat nulogelsang 3'
             }
         ];
-        this.showpage = false;
+        this.showpage = true;
         this.userCheckIn = "";
     }
     EventCmp.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.forEach(function (params) {
             _this.eventId = params['eventid'];
+            _this.adminId = params['adminid'];
             _this.service.getInitialCheckIns(_this.eventId).then(function (res) {
                 console.log(res.json());
                 _this.checkins = res.json().checks;
                 _this.event = res.json().ronaldSet[0];
                 if (_this.event == null) {
+                    _this.router.navigate('/notfound');
+                }
+                if (_this.event.adminId !== _this.adminId) {
                     _this.router.navigate('/notfound');
                 }
                 _this.showpage = true;

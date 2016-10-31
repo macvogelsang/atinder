@@ -4,7 +4,7 @@
 		<fieldset>
 			<div class="form-group" [class.has-error]="!name.valid && !name.pristine">
 				<label for="name">Event Name</label>
-				<input placeholder="HackNC" type="text" class="form-control input-lg" id="name" required
+				<input placeholder="HackNC" type="text" maxlength="45" class="text-center form-control input-lg" id="name" required
 				[(ngModel)]="model.name" name="name"
 				#name="ngModel">
 				<span *ngIf="!name.valid && !name.pristine"
@@ -13,7 +13,7 @@
 			</div>
 			<div class="form-group">
 				<label for="description">Description</label>
-				<input type="text" class="form-control" id="description"
+				<input type="text" placeholder="(optional)" class="text-center form-control" maxlength="200" id="description"
 				  [(ngModel)]="model.description" name="description">
 			</div>
 			<div class="row">

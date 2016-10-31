@@ -53,7 +53,7 @@ export class EventCmp implements OnInit{
     ];
     eventId;
     event;
-    showpage = false;
+    showpage = true;
     socketConnection;
     selected;
     userCheckIn = "";
@@ -68,6 +68,8 @@ export class EventCmp implements OnInit{
     ngOnInit(): void {
         this.route.params.forEach((params: Params) => {
             this.eventId = params['eventid'];
+            this.adminId = params['adminid'];
+
             this.service.getInitialCheckIns(this.eventId).then(res => {
                 console.log(res.json())
                 this.checkins = res.json().checks;
@@ -76,7 +78,13 @@ export class EventCmp implements OnInit{
                 if (this.event == null){
                     this.router.navigate('/notfound');
                 }
+
+                if (this.event.adminId !== this.adminId) {
+                    this.router.navigate('/notfound');
+                }
+
                 this.showpage = true;
+
 
                 var socket;
                 socket = io();
