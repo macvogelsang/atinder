@@ -53,7 +53,7 @@ export class EventCmp implements OnInit{
     ];
     eventId;
     event;
-    showpage = false;
+    showpage = true;
     socketConnection;
     selected;
     userCheckIn = "";
@@ -111,6 +111,11 @@ export class EventCmp implements OnInit{
     }
 
     getUser(number){
+        if (this.selected == number){
+            this.selected = "";
+            this.userCheckIn = "";
+            return
+        }
         this.selected = number;
         this.service.getUserCheckIn(this.event.adminId, number).then(res => {
             console.log(res.json())

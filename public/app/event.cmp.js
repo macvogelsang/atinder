@@ -50,7 +50,7 @@ var EventCmp = (function () {
                 content: 'Mac Vlore eu fugiat nulogelsang 3'
             }
         ];
-        this.showpage = false;
+        this.showpage = true;
         this.userCheckIn = "";
     }
     EventCmp.prototype.ngOnInit = function () {
@@ -94,6 +94,11 @@ var EventCmp = (function () {
     };
     EventCmp.prototype.getUser = function (number) {
         var _this = this;
+        if (this.selected == number) {
+            this.selected = "";
+            this.userCheckIn = "";
+            return;
+        }
         this.selected = number;
         this.service.getUserCheckIn(this.event.adminId, number).then(function (res) {
             console.log(res.json());
