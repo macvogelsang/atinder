@@ -53,7 +53,7 @@ export class EventCmp implements OnInit{
     ];
     eventId;
     event;
-    showpage = true;
+    showpage = false;
     socketConnection;
     selected;
     userCheckIn = "";
