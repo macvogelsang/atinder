@@ -3,7 +3,9 @@ import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import {MasterService} from "./master.service";
 import { Observable } from 'rxjs/Observable';
-// import {json2csv} from 'json2csv';
+// import * as json2csv from 'json2csv/bin/json2csv';
+// import * as json2csv from 'json2csv/bin/json2csv.js';
+
 declare var io: any;
 declare var json2csv: any;
 
