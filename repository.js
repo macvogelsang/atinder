@@ -59,16 +59,19 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 						if (err) {
 							console.log(err);
 						} else {
+							var newEntry;
 							if (ronaldSet.length != 0) {
 								queryStore = "UPDATE check_ins SET content = '" + cleanContent + "' WHERE number = '" + checkinNumber + "' AND eventId = '" + eventId + "';";
+								newEntry = false;
 							} else {
 								queryStore = "INSERT INTO check_ins (number, eventId, content) VALUES ('" + checkinNumber + "', '" + eventId + "', '" + cleanContent + "' )";
+								newEntry = true;
 							}
 							sql.query(queryStore, function (err, recordSet) {
 								if (err) {
 									console.log(err);
 								} else {
-									sendTwilioConfirmation(checkinNumber);
+									sendTwilioConfirmation(checkinNumber, newEntry);
 									var check = {
 										eventId: eventId,
 										number: checkinNumber,
@@ -82,20 +85,26 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 					});
 				} else {
 					console.log("Time was not appropriate");
-					sendTwilioDeny(checkinNumber);
+					sendTwilioDeny(checkinNumber, true);
 				}
 			} else {
-				sendTwilioDeny(checkinNumber);
+				sendTwilioDeny(checkinNumber, false);
 			}
 		}
 	});
 }
 
-var sendTwilioConfirmation = function (checkinNumber) {
+var sendTwilioConfirmation = function (checkinNumber, newEntry) {
+	var body;
+	if (newEntry) {
+		body = "[TextIn.org] Thank you for texting in! Your attendance has been recorded.";
+	} else {
+		body = "[TextIn.org] You have already texted in for this event! Your submission has been updated."; 
+	}
 	twilio.messages.create({
-		body: "Thank you for texting in! Your attendanced has been recorded.",
+		body: body,
 		to: checkinNumber,
-		from: "19196662564"
+		from: twilioConfig.number
 	}, function (err, data) {
 		if (err) {
 			console.log("Twilio error");
@@ -106,11 +115,17 @@ var sendTwilioConfirmation = function (checkinNumber) {
 	});
 }
 
-var sendTwilioDeny = function (checkinNumber) {
+var sendTwilioDeny = function (checkinNumber, timeError) {
+	var body;
+	if (timeError) {
+		body = "[TextIn.org] Uh-oh, you are outside of the text in period for this event! Please speak with the event coordinator for more information.";
+	} else {
+		body = "[TextIn.org] Uh-oh, the event code you submitted does not match with any event! Please double check your event code.";
+	}
 	twilio.messages.create({
-		body: "Uh-oh, you are outside of the check in time! Please check with the event coordinator for the proper time.",
+		body: body,
 		to: checkinNumber,
-		from: "19196662564"
+		from: twilioConfig.number
 	}, function (err, data) {
 		if (err) {
 			console.log("Twilio error");
@@ -255,7 +270,7 @@ var getUserCheckIn = function (adminId, number, res) {
 				if (count < eventIds.length) {
 					ronaldQuery += ", ";
 				} else {
-					ronaldQuery += ");";
+					ronaldQuery += ") AND adminId = '" + adminId + "';";
 				}
 			});
 			console.log(ronaldQuery);
