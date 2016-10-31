@@ -50,6 +50,7 @@ var EventCmp = (function () {
                 content: 'Mac Vlore eu fugiat nulogelsang 3'
             }
         ];
+        this.showpage = false;
         this.userCheckIn = "";
     }
     EventCmp.prototype.ngOnInit = function () {
@@ -63,6 +64,7 @@ var EventCmp = (function () {
                 if (_this.event == null) {
                     _this.router.navigate('/notfound');
                 }
+                _this.showpage = true;
                 var socket;
                 socket = io();
                 socket.on(_this.eventId.toLowerCase(), function (data) {

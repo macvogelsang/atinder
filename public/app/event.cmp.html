@@ -1,4 +1,4 @@
-<div class="event">
+<div class="event" *ngIf="showpage">
 	<div class="row">
 		<h1>{{event?.name | uppercase}}</h1>
 		<div class="col-md-6">
@@ -11,10 +11,8 @@
 			</div>
 			<div class="well" style="font-size:26px;">{{checkins?.length}} {{checkins.length==1 ? 'person' : 'people'}} texted in</div>
 			<div class="user-info well" *ngIf="userCheckIn !== ''">
-				<h4>This number attended the following events:</h4>
-				<ul>
-					<li *ngFor="let event of userCheckIn">{{event.eventId}} -- {{event.name}}</li>
-				</ul>
+				<h4>This number attended the following events that you created:</h4>
+					<span *ngFor="let event of userCheckIn">{{event.eventId}} -- {{event.name}}</span><br>
 			</div>
 		</div>
 		<div class="col-md-6 text-center responses">

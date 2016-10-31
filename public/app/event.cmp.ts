@@ -53,6 +53,7 @@ export class EventCmp implements OnInit{
     ];
     eventId;
     event;
+    showpage = false;
     socketConnection;
     selected;
     userCheckIn = "";
@@ -60,6 +61,7 @@ export class EventCmp implements OnInit{
     constructor(private service: MasterService,
                 private route: ActivatedRoute
                 private router: Router) {
+
 
     }
 
@@ -74,7 +76,7 @@ export class EventCmp implements OnInit{
                 if (this.event == null){
                     this.router.navigate('/notfound');
                 }
-
+                this.showpage = true;
 
                 var socket;
                 socket = io();

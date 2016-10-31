@@ -25,8 +25,8 @@ import {NotfoundCmp} from './notfound.cmp';
       TimepickerModule,
       RouterModule.forRoot([
           { path: 'event/:eventid', component: EventCmp },
-          { path: ':adminid', component: DashboardCmp },
           { path: 'notfound', component: NotfoundCmp },
+          { path: ':adminid', component: DashboardCmp },
           { path: '', component: HomeCmp },
           { path: '**', component: NotfoundCmp }
       ]),
