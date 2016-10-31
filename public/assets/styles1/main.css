@@ -1,4 +1,32 @@
 /* Master Styles */
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px; }
+
+::-webkit-scrollbar-thumb {
+  background-color: #5cb85c;
+  border-radius: 0; }
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #c4c4c4; }
+
+::-webkit-scrollbar-track {
+  background-color: #2b3e50; }
+
+/* End Scrollbar */
+a.styled-link {
+  text-decoration: none;
+  color: #ebebeb; }
+
+a.styled-link:hover, focus {
+  text-decoration: underline; }
+
+.loader {
+  display: block;
+  margin: 100px auto;
+  font-size: 1.5em;
+  text-align: center; }
+
 .row {
   margin: 0px; }
 
@@ -8,7 +36,8 @@
 
 .home-content {
   text-align: center;
-  margin: 50px 0px; }
+  margin: 50px 0px;
+  margin-bottom: 200px; }
   .home-content span.logo {
     color: #5cb85c;
     font-size: 90px; }
@@ -67,19 +96,92 @@
 .event {
   text-align: center; }
   .event h1 {
-    border-bottom: 2px solid #5cb85c; }
-  .event p.response {
-    display: inline-block;
-    margin: 10px;
-    padding: 5px;
-    font-size: 15px;
-    background: #4e5d6c; }
+    border-bottom: 4px solid #5cb85c;
+    margin-bottom: 30px;
+    font-size: 50px; }
+    .event h1 .fa {
+      color: #5cb85c;
+      transition: 350ms;
+      cursor: pointer; }
+    .event h1 .fa:hover, .event h1 .fa:focus {
+      opacity: 0.7; }
+  .event h3 {
+    margin: 10px 0px; }
+  .event .responses {
+    height: 700px;
+    overflow: auto; }
+    .event .responses .response {
+      display: block;
+      margin-bottom: 20px;
+      padding: 10px 0px;
+      font-size: 15px;
+      transition: 350ms;
+      cursor: pointer;
+      background: #4e5d6c;
+      border: 1px solid #4e5d6c;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; }
+      .event .responses .response span {
+        padding: 0px 10px; }
+      .event .responses .response span.res-content {
+        -webkit-box-flex: 2 auto;
+        -moz-box-flex: 2 auto;
+        -webkit-flex: 2 auto;
+        -ms-flex: 2 auto;
+        flex: 2 auto;
+        text-align: left; }
+    .event .responses .response:hover, .event .responses .response:focus {
+      background: #707c88; }
+    .event .responses .response.active {
+      border-color: #5cb85c; }
 
 .footer {
   border-top: 2px solid #5cb85c;
-  margin-top: 250px;
+  margin-top: 50px;
+  padding-top: 10px;
   text-align: center; }
   .footer p {
-    margin: 10px 0px; }
+    margin: 0px 0px 10px 0px; }
+
+.spinner {
+  margin: 100px auto 0;
+  width: 110px;
+  text-align: center; }
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  margin: 0px 5px;
+  background-color: #5cb85c;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both; }
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s; }
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s; }
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1); } }
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,11 +1,15 @@
 <html>
   <head>
     <base href="/">
-    <title>Text In</title>
+    <title>TextIn</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="TextIn is a attendance taking app where users can simply sign in with a text message -- no account required.">
+    <meta name="author" content="Ronald Ding and Mac Vogelsang">
+    <meta name="title" content="TextIn - SMS Attendance">
     <script src="https://use.fontawesome.com/a43f2de9f8.js"></script>
     <link rel="stylesheet" href="assets/styles1/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/styles1/animate.css">
     <link rel="stylesheet" href="assets/styles1/main.css">
     <!-- 1. Load libraries -->
      <!-- Polyfill(s) for older browsers -->
@@ -27,6 +31,15 @@
   </head>
   <!-- 3. Display the application -->
   <body>
-    <my-app>Loading...</my-app>
+    <my-app>
+        <div class="loader">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <!-- <span id="loading-text">Loading...</span> -->
+        </div>
+    </my-app>
   </body>
 </html>

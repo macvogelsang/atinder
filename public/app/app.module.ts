@@ -11,6 +11,7 @@ import {HomeCmp} from './home.cmp';
 import {DashboardCmp} from './dashboard.cmp';
 import {EventCmp} from './event.cmp';
 import {EventFormCmp} from './event-form.cmp';
+import {NotfoundCmp} from './notfound.cmp';
 
 // import {MasterService} from './master.service';
 // import {NotFoundCmp} from './notfound.cmp';
@@ -23,10 +24,11 @@ import {EventFormCmp} from './event-form.cmp';
       DatepickerModule,
       TimepickerModule,
       RouterModule.forRoot([
-          { path: 'event/:eventid', component: EventCmp },
+          { path: ':adminid/:eventid', component: EventCmp },
+          { path: 'notfound', component: NotfoundCmp },
           { path: ':adminid', component: DashboardCmp },
           { path: '', component: HomeCmp },
-          { path: '**', component: HomeCmp }
+          { path: '**', component: NotfoundCmp }
       ]),
   ],
   declarations: [
@@ -34,7 +36,8 @@ import {EventFormCmp} from './event-form.cmp';
       HomeCmp,
       DashboardCmp,
       EventCmp,
-      EventFormCmp
+      EventFormCmp,
+      NotfoundCmp
   ],
   bootstrap:    [ AppCmp ]
 })

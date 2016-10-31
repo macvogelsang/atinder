@@ -1,6 +1,58 @@
 /* Master Styles */
 $accent:#5cb85c;
 $lightback:#4e5d6c;
+$lighterback: #707c88;
+$background:#2b3e50;
+$white:#ebebeb;
+
+/* Scrollbar */
+
+::-webkit-scrollbar{width: 6px;}
+
+::-webkit-scrollbar-thumb{background-color:rgb(92, 184, 92); border-radius: 0;}
+::-webkit-scrollbar-thumb:hover{background-color:rgb(196, 196, 196);}
+
+::-webkit-scrollbar-track{background-color:$background}
+
+
+/* End Scrollbar */
+
+a.styled-link {
+    text-decoration: none;
+    color:$white;
+}
+a.styled-link:hover, focus {
+    text-decoration:underline;
+}
+
+.loader {
+    display:block;
+    margin:100px auto;
+    font-size:1.5em;
+    text-align:center;
+}
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;
+  -moz-box-ordinal-group: $val;
+  -ms-flex-order: $val;
+  -webkit-order: $val;
+  order: $val;
+}
 
 .row {
 	margin:0px;
@@ -13,6 +65,7 @@ $lightback:#4e5d6c;
 .home-content {
 	text-align:center;
 	margin:50px 0px;
+    margin-bottom:200px;
 	span.logo {
 		color:$accent;
 		font-size:90px;
@@ -86,22 +139,104 @@ $lightback:#4e5d6c;
 .event {
 	text-align: center;
 	h1 {
-		border-bottom:2px solid $accent;
+		border-bottom:4px solid $accent;
+        margin-bottom:30px;
+        font-size:50px;
+        .fa {
+            color:$accent;
+            transition:350ms;
+            cursor:pointer;
+        }
+        .fa:hover, .fa:focus {
+            opacity:0.7;
+        }
 	}
-	p.response {
-		display:inline-block;
-		margin:10px;
-		padding:5px;
-		font-size:15px;
-		background:$lightback;
+	h3 {
+		margin:10px 0px;
+	}
+	.responses {
+		height: 700px;
+		overflow: auto;
+		.response {
+			display:block;
+			margin-bottom:20px;
+			padding:10px 0px;
+			font-size:15px;
+            transition: 350ms;
+            cursor:pointer;
+            background:$lightback;
+            border:1px solid $lightback;
+			@include flexbox();
+			align-items: center;
+			justify-content:flex-start;
+			span {
+				padding:0px 10px;
+
+				// @include flex(2 auto);
+			}
+			span.res-content {
+				@include flex(2 auto);
+				text-align:left;
+			}
+		}
+        .response:hover, .response:focus{
+            background:$lighterback;
+        }
+        .response.active {
+            border-color:$accent;
+        }
 	}
 }
 
 .footer {
 	border-top:2px solid $accent;
-	margin-top:250px;
+	margin-top:50px;
+    padding-top:10px;
 	text-align:center;
 	p {
-		margin:10px 0px
+		margin:0px 0px 10px 0px;
 	}
+}
+
+.spinner {
+  margin: 100px auto 0;
+  width: 110px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  margin:0px 5px;
+  background-color: $accent;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
 }

@@ -20,6 +20,7 @@ var home_cmp_1 = require('./home.cmp');
 var dashboard_cmp_1 = require('./dashboard.cmp');
 var event_cmp_1 = require('./event.cmp');
 var event_form_cmp_1 = require('./event-form.cmp');
+var notfound_cmp_1 = require('./notfound.cmp');
 // import {MasterService} from './master.service';
 // import {NotFoundCmp} from './notfound.cmp';
 var AppModule = (function () {
@@ -34,10 +35,11 @@ var AppModule = (function () {
                 datepicker_1.DatepickerModule,
                 timepicker_1.TimepickerModule,
                 router_1.RouterModule.forRoot([
-                    { path: 'event/:eventid', component: event_cmp_1.EventCmp },
+                    { path: ':adminid/:eventid', component: event_cmp_1.EventCmp },
+                    { path: 'notfound', component: notfound_cmp_1.NotfoundCmp },
                     { path: ':adminid', component: dashboard_cmp_1.DashboardCmp },
                     { path: '', component: home_cmp_1.HomeCmp },
-                    { path: '**', component: home_cmp_1.HomeCmp }
+                    { path: '**', component: notfound_cmp_1.NotfoundCmp }
                 ]),
             ],
             declarations: [
@@ -45,7 +47,8 @@ var AppModule = (function () {
                 home_cmp_1.HomeCmp,
                 dashboard_cmp_1.DashboardCmp,
                 event_cmp_1.EventCmp,
-                event_form_cmp_1.EventFormCmp
+                event_form_cmp_1.EventFormCmp,
+                notfound_cmp_1.NotfoundCmp
             ],
             bootstrap: [app_cmp_1.AppCmp]
         }), 
