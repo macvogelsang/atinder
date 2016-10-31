@@ -42,7 +42,7 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 	var cleanContent = content.substring(3);
 	cleanContent = cleanContent.trim();
 	cleanContent = escapeString(cleanContent);
-	var query = "SELECT checkStart, checkEnd FROM events WHERE eventId = '" + eventId + "';"
+	var query = "SELECT name, checkStart, checkEnd FROM events WHERE eventId = '" + eventId + "';"
 	sql.query(query, function (err, recordSet) {
 		if (err) {
 			console.log(err);
@@ -52,6 +52,7 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 				console.log("EventId for checkin found");
 				var checkStart = new Date(recordSet[0].checkStart);
 				var checkEnd = new Date(recordSet[0].checkEnd);
+				var eventName = recordSet[0].name;
 				var queryStore;
 				if (currentTime.getTime() >= checkStart.getTime() && currentTime.getTime() <= checkEnd.getTime()) {
 					var ronaldQuery = "SELECT * FROM check_ins WHERE number = '" + checkinNumber + "' AND eventId = '" + eventId + "';";
@@ -71,11 +72,12 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 								if (err) {
 									console.log(err);
 								} else {
-									sendTwilioConfirmation(checkinNumber, newEntry);
+									sendTwilioConfirmation(checkinNumber, newEntry, eventName);
 									var check = {
 										eventId: eventId,
 										number: checkinNumber,
-										content: cleanContent
+										content: cleanContent,
+										timestamp: new Date()
 									}
 									console.log("Event emitted: " + eventId);
 									io.sockets.emit(eventId.toLowerCase(), check);
@@ -85,21 +87,21 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 					});
 				} else {
 					console.log("Time was not appropriate");
-					sendTwilioDeny(checkinNumber, true);
+					sendTwilioDeny(checkinNumber, true, eventName);
 				}
 			} else {
-				sendTwilioDeny(checkinNumber, false);
+				sendTwilioDeny(checkinNumber, false, false);
 			}
 		}
 	});
 }
 
-var sendTwilioConfirmation = function (checkinNumber, newEntry) {
+var sendTwilioConfirmation = function (checkinNumber, newEntry, eventName) {
 	var body;
 	if (newEntry) {
-		body = "[TextIn.org] Thank you for texting in! Your attendance has been recorded.";
+		body = "[TextIn.org] Thank you for texting in for " + eventName + " ! Your attendance has been recorded.";
 	} else {
-		body = "[TextIn.org] You have already texted in for this event! Your submission has been updated."; 
+		body = "[TextIn.org] You have already texted in for " + eventName + "! Your submission has been updated."; 
 	}
 	twilio.messages.create({
 		body: body,
@@ -115,10 +117,10 @@ var sendTwilioConfirmation = function (checkinNumber, newEntry) {
 	});
 }
 
-var sendTwilioDeny = function (checkinNumber, timeError) {
+var sendTwilioDeny = function (checkinNumber, timeError, eventName) {
 	var body;
 	if (timeError) {
-		body = "[TextIn.org] Uh-oh, you are outside of the text in period for this event! Please speak with the event coordinator for more information.";
+		body = "[TextIn.org] Uh-oh, you are outside of the text in period for " + eventName + "! Please speak with the event coordinator for more information.";
 	} else {
 		body = "[TextIn.org] Uh-oh, the event code you submitted does not match with any event! Please double check your event code.";
 	}
