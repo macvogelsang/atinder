@@ -73,11 +73,16 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 									console.log(err);
 								} else {
 									sendTwilioConfirmation(checkinNumber, newEntry, eventName);
+									var time = new Date();
+									var isoString = time.toISOString();
+									var isoDate = isoString.substring(0, 10);
+									var isoTime = isoString.substring(11, 19);
+									var timestamp = isoDate + " " + isoString;
 									var check = {
 										eventId: eventId,
 										number: checkinNumber,
 										content: cleanContent,
-										timestamp: new Date()
+										timestamp: timestamp
 									}
 									console.log("Event emitted: " + eventId);
 									io.sockets.emit(eventId.toLowerCase(), check);
@@ -99,7 +104,7 @@ var logTwilioInbound = function (checkinNumber, content, io) {
 var sendTwilioConfirmation = function (checkinNumber, newEntry, eventName) {
 	var body;
 	if (newEntry) {
-		body = "[TextIn.org] Thank you for texting in for " + eventName + " ! Your attendance has been recorded.";
+		body = "[TextIn.org] Thank you for texting in for " + eventName + "! Your attendance has been recorded.";
 	} else {
 		body = "[TextIn.org] You have already texted in for " + eventName + "! Your submission has been updated."; 
 	}
