@@ -10,13 +10,13 @@
 				<button class="btn btn-success" (click)="exportCSV()"><i class="fa fa-file-excel-o"></i> Export to CSV</button>
 			</div>
 			<div class="well" style="font-size:26px;">{{checkins?.length}} {{checkins.length==1 ? 'person' : 'people'}} texted in</div>
-			<div class="user-info well" *ngIf="userCheckIn !== ''">
+			<div class="user-info well animated flipInX" *ngIf="userCheckIn !== ''">
 				<h4>This person attended the following events that you created:</h4>
 		        <div *ngFor="let event of userCheckIn">{{event.eventId}} -- {{event.name}} -- {{event.checkStart | date:'mediumDate'}}</div>
 			</div>
 		</div>
 		<div class="col-md-6 text-center responses">
-			<div *ngFor="let response of checkins" [class.active]="selected == response.number" class="response" (click)="getUser(response.number)">
+			<div *ngFor="let response of checkins" [class.active]="selected == response.number" class="response animated bounceInRight" (click)="getUser(response.number)">
 				<span>{{response.number}}</span><span class="res-content">{{response.content}}</span>
 			</div>
 		</div>

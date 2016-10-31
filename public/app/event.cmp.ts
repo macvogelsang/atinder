@@ -59,7 +59,7 @@ export class EventCmp implements OnInit{
     userCheckIn = "";
 
     constructor(private service: MasterService,
-                private route: ActivatedRoute
+                private route: ActivatedRoute,
                 private router: Router) {
 
 

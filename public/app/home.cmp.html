@@ -6,5 +6,5 @@
 		<h1>TextIn</h1>
 		<h3>A simple app for taking event attendance via SMS</h3><br>
 		<button *ngIf="formHidden" (click)="showForm()" class="btn btn-success">Create Event</button>
-		<event-form [adminId]="" *ngIf="!formHidden"></event-form>
+		<event-form class="animated fadeInUp" [adminId]="" *ngIf="!formHidden"></event-form>
 	</div>

@@ -15,6 +15,6 @@
 	<div class="row">
 		<div style="text-align:center;margin:30px auto;">
 			<button *ngIf="formHidden" (click)="showForm()" class="btn btn-success">Add New Event</button>
-			<event-form [adminId]="adminId" *ngIf="!formHidden"></event-form>
+			<event-form class="animated fadeInUp" [adminId]="adminId" *ngIf="!formHidden"></event-form>
 		</div>
 	</div>
