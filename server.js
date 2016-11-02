@@ -8,7 +8,7 @@ var repository = require('./repository.js');
 var app = express();
 var server = http.Server(app);
 var io = require('socket.io')(server);
-var port = 56789;
+var port = 8080;
 
 io.sockets.on('connection', function (socket) {
 	console.log("A user connected");
