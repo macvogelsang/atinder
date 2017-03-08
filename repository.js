@@ -10,7 +10,7 @@ var twilio = require('twilio')(twilioConfig.accountSid, twilioConfig.authToken);
 
 var sql;
 
-var handleDisconnect {
+var handleDisconnect = function () {
 	sql = mysql.createConnection(mysqlConfig);
 	sql.connect(function (err) {
 		console.log("Database connection established.");
