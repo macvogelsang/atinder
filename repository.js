@@ -8,14 +8,30 @@ var io;
 
 var twilio = require('twilio')(twilioConfig.accountSid, twilioConfig.authToken);
 
-var sql = mysql.createConnection(mysqlConfig);
+var sql;
 
-sql.connect(function (err) {
-	console.log("Database connection established.");
-	if (err) {
+var handleDisconnect() {
+	sql = mysql.createConnection(mysqlConfig);
+	sql.connect(function (err) {
+		console.log("Database connection established.");
+		if (err) {
+			console.log(err);
+		}
+	});
+
+	sql.on('error', function (err) {
 		console.log(err);
-	}
-});
+		console.log("Database connection disrupted. Attempting reconnection.");
+		if (err.code === "PROTOCOL_CONNECTION_LOST") {
+			handleDisconnect();
+		} else {
+			throw err;
+		}
+	});
+}
+
+handleDisconnect();
+
 
 var escapeString = function (str) {
 	return str.replace(/'/g, "''");
